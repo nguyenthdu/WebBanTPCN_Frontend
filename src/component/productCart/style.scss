@@ -1,0 +1,48 @@
+.product__link {
+    text-decoration: none;
+}
+
+.product__card {
+    height: 100%;
+}
+
+/* Hiệu ứng scale nhỏ khi hover vào Card */
+.product__card:hover {
+    transform: scale(1.05);
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease; /* Combine multiple transition properties */
+    background-color: pink; /* Set the background color without double quotes */
+}
+
+// .product__card_body {
+//     height: 100%;
+// }
+
+.product__card_title {
+    height: 4em;
+    overflow: hidden;
+}
+
+.product__card_description {
+    height: 3em;
+    overflow: hidden;
+}
+
+.product__card_img {
+    height: fit-content;
+    padding: 1.5em;
+}
+
+/* Thay đổi số lượng cột trên một hàng dựa vào kích thước màn hình */
+@media (max-width: 576px) {
+    .product-card {
+        flex-basis: 100%; /* Một card trên mỗi hàng */
+    }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    .product-card {
+        flex-basis: 50%; /* Hai card trên mỗi hàng */
+    }
+}

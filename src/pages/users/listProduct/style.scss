@@ -1,0 +1,141 @@
+@import "_all"; // Import tất cả nội dung từ _all.scss
+
+.cContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.cRow1 {
+    //màu sắc chung chỗ này sau này cần css chung vào 1 biến để sửa cho dễ
+    background-color: $backgroundColor;
+    flex: 1;
+    border-radius: 10px;
+    align-items: center;
+    min-height: 30px;
+}
+
+.cRow1 h6 {
+    margin-bottom: 0;
+}
+
+.cRow2 {
+    // background-color: pink;
+    flex: 7;
+    // justify-content: space-between;
+}
+
+.cColumn1_Row1 {
+    border-color: red;
+}
+
+.cColumn1 {
+    background-color: $backgroundColor;
+    border-radius: 10px;
+}
+
+.stlH6 {
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+.cColumn1_Row2 ul,
+.cColumn1_Row3 ul {
+    padding: 5px;
+}
+
+.cColumn1_Row2 ul li,
+.cColumn1_Row3 ul li {
+    list-style: none;
+}
+
+._ip {
+    margin-right: 5px;
+}
+
+.cColumn2 {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.cColumn2_Row1 {
+    // background-color: $backgroundColor;
+    flex: 1;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.sortByCriteria {
+    padding-left: 5px;
+    padding-right: 5px;
+    border-color: black;
+    background-color: $backgroundColor;
+    border: 1px solid;
+    border-radius: 15px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.sortedByCriteria {
+    overflow: hidden;
+    // padding-left: 10px;
+    position: relative;
+    padding-right: 10px;
+    // background-color: green;
+}
+
+.check_icon_criteria {
+    margin-top: -3px;
+    margin-right: -5px;
+    font-size: 10px;
+    border-top: 24px solid blue;
+    border-left: 24px solid #c2414100;
+    top: 0;
+    right: 0;
+    position: absolute; /* Đặt phần tử là tuyệt đối để kiểm soát vị trí */
+    width: 10px;
+    height: 10px;
+    color: black;
+    font-size: 10px;
+}
+
+.iconList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectedList {
+    color: blue;
+}
+
+.list {
+    color: gray;
+}
+
+.cColumn2_Row2 {
+    flex: 9;
+}
+
+/* Hiệu ứng scale nhỏ khi hover vào Card */
+.product-card_a:hover {
+    transform: scale(1.02);
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease; /* Combine multiple transition properties */
+    background-color: pink; /* Set the background color without double quotes */
+}
+
+/* Thay đổi số lượng cột trên một hàng dựa vào kích thước màn hình */
+@media (max-width: 576px) {
+    .product-card {
+        flex-basis: 100%; /* Một card trên mỗi hàng */
+    }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    .product-card {
+        flex-basis: 50%; /* Hai card trên mỗi hàng */
+    }
+}

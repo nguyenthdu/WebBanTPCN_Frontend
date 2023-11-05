@@ -6,6 +6,12 @@
 
 .brand {
     color: map.get($theme-colors, text);
+    width: 12%;
+}
+
+.brand__logo {
+    width: 100%;
+    object-fit: contain;
 }
 
 .brand:hover {

@@ -1,5 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
 import { memo, useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 // import Icon from "react-icon";

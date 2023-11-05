@@ -1,5 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
 import { memo, useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import BanerRight from "../../../component/introduction/banerRight";

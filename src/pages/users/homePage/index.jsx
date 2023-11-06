@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Image, Row } from "react-bootstrap";
 import BanerRight from "../../../component/introduction/banerRight";
 import Introduction from "../../../component/introduction/introduction";
 import ProductCard from "../../../component/productCart/productCard";
@@ -76,6 +76,14 @@ const HomePage = () => {
         </div>
       </div>
       <div className="product__Container_for_children">
+        <div class="tem_title__container" gutter="[object Object]">
+          <Image
+            src="https://nhathuoclongchau.com.vn/static/images/san-pham-ban-chay.svg"
+            alt="Sản phẩm bán chạy"
+            className="tem_title"
+          />
+          <h2 className="txt_h2 spChild">Sản phẩm cho bé</h2>
+        </div>
         <div className="product_for_children">
           <div className="product__List">
             {content !== null ? content : renderProducts()}
@@ -83,15 +91,13 @@ const HomePage = () => {
         </div>
       </div>
       <div className="product__Container_for_mom">
-        <div className="slider__Introduction">
-          <Row>
-            <Col xs={12} sm={12} md={8} lg={8} xl={8} className="banner__left">
-              {content !== null ? content : renderSliderIntroduction()}
-            </Col>
-            <Col xs={12} sm={12} md={4} lg={4} xl={4} className="banner__right">
-              <BanerRight />
-            </Col>
-          </Row>
+        <div class="tem_title__container" gutter="[object Object]">
+          <Image
+            src="https://nhathuoclongchau.com.vn/static/images/san-pham-ban-chay.svg"
+            alt="Sản phẩm cho mẹ"
+            className="tem_title"
+          />
+          <h2 className="txt_h2">Sản phẩm cho mẹ</h2>
         </div>
         <div className="product_for_Mom">
           <div className="product__List">
@@ -100,15 +106,15 @@ const HomePage = () => {
         </div>
       </div>
       <div className="product__Container_for_men">
-        <div className="slider__Introduction">
-          <Row>
-            <Col xs={12} sm={12} md={8} lg={8} xl={8} className="banner__left">
-              {content !== null ? content : renderSliderIntroduction()}
-            </Col>
-            <Col xs={12} sm={12} md={4} lg={4} xl={4} className="banner__right">
-              <BanerRight />
-            </Col>
-          </Row>
+        <div class="tem_title__container" gutter="[object Object]">
+          <Image
+            src="https://nhathuoclongchau.com.vn/static/images/san-pham-ban-chay.svg"
+            alt="Sản phẩm cho mẹ"
+            className="tem_title"
+          />
+          <h2 className="txt_h2 spMen" style={{ left: "44%" }}>
+            Sản phẩm cho nam
+          </h2>
         </div>
         <div className="product_for_Men">
           <div className="product__List">
@@ -117,15 +123,13 @@ const HomePage = () => {
         </div>
       </div>
       <div className="product__Container_for_women">
-        <div className="slider__Introduction">
-          <Row>
-            <Col xs={12} sm={12} md={8} lg={8} xl={8} className="banner__left">
-              {content !== null ? content : renderSliderIntroduction()}
-            </Col>
-            <Col xs={12} sm={12} md={4} lg={4} xl={4} className="banner__right">
-              <BanerRight />
-            </Col>
-          </Row>
+        <div class="tem_title__container" gutter="[object Object]">
+          <Image
+            src="https://nhathuoclongchau.com.vn/static/images/san-pham-ban-chay.svg"
+            alt="Sản phẩm cho mẹ"
+            className="tem_title"
+          />
+          <h2 className="txt_h2">Sản phẩm cho nữ</h2>
         </div>
         <div className="product_for_Women">
           <div className="product__List">

@@ -51,6 +51,8 @@
 
 .btn {
     border: none;
+    display: flex;
+    flex-direction: row;
 }
 
 .icon__login,

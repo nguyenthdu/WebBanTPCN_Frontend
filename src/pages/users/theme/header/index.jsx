@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import { Cart2, Person, Search } from "react-bootstrap-icons";
 import LoginModal from "../../../../component/login/loginModal";
+import UserMenu from "../../../../component/userMenu/userMenu";
 import useModal from "../../../../hook/modal/useModal";
 import AuthService from "../../../../services/auth.service";
 import "./style.scss";
@@ -40,10 +41,14 @@ function Header() {
               </Button>
             </Form>
             <div className="btn">
-              <Button className="mx-2 icon__login" onClick={toggle}>
-                <Person className="me-2" />
-                {currentUser ? currentUser.username : "Đăng nhập"}
-              </Button>
+              {currentUser ? (
+                <UserMenu currentUser={currentUser} />
+              ) : (
+                <Button className="mx-2 icon__login" onClick={toggle}>
+                  <Person className="me-2" />
+                  <span>Đăng nhập</span>
+                </Button>
+              )}
               <Button className="mx-2 icon__cart">
                 <Cart2 className="me-2" />
                 Giỏ Hàng

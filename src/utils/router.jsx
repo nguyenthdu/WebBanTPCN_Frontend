@@ -2,7 +2,7 @@
 export const ROUTERS = {
   USER: {
     HOME: process.env.IS_PROD ? "/" : "",
-    PROFILE: "profile",
+    PROFILE: "/profile",
     PRODUCT_DETAIL: "/product/:id",
     LIST_PRODUCT: "/listProduct",
     CART: "/cart",

@@ -2,16 +2,70 @@
     text-align: center;
 }
 
+.product__Container_slider_introduction {
+    max-width: 100%;
+    background-color: #f8f9fd;
+    padding: 1em;
+}
+
 .slider__Introduction {
     display: flex;
     flex-direction: row;
-    width: 100%;
-    // background-color: #f8f9fd;
+    max-width: 1320px;
+    margin: auto;
 }
 
-// .product__Container {
-//     background-color: #fcf3e8;
-// }
+.product__Container_for_children {
+    max-width: 100%;
+    background-color: #fcf3e8;
+    padding: 1em;
+}
+
+.product_for_children {
+    display: flex;
+    flex-direction: row;
+    max-width: 1320px;
+    margin: auto;
+}
+
+.product__Container_for_mom {
+    max-width: 100%;
+    background-color: #e5eeff;
+    padding: 1em;
+}
+
+.product_for_Mom {
+    display: flex;
+    flex-direction: row;
+    max-width: 1320px;
+    margin: auto;
+}
+
+.product__Container_for_men {
+    max-width: 100%;
+    background-color: #f4e2ce;
+    padding: 1em;
+}
+
+.product_for_Men {
+    display: flex;
+    flex-direction: row;
+    max-width: 1320px;
+    margin: auto;
+}
+
+.product__Container_for_women {
+    max-width: 100%;
+    background-color: #fcf3e8;
+    padding: 1em;
+}
+
+.product_for_Women {
+    display: flex;
+    flex-direction: row;
+    max-width: 1320px;
+    margin: auto;
+}
 
 .advise__container {
     background-color: pink;

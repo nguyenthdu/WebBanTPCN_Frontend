@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import BanerRight from "../../../component/introduction/banerRight";
 import Introduction from "../../../component/introduction/introduction";
 import ProductCard from "../../../component/productCart/productCard";
@@ -62,25 +62,75 @@ const HomePage = () => {
   };
 
   return (
-    <Container className="my-4">
-      <div className="slider__Introduction">
-        <Row>
-          <Col xs={12} sm={12} md={8} lg={8} xl={8} className="banner__left">
-            {content !== null ? content : renderSliderIntroduction()}
-          </Col>
-          <Col xs={12} sm={12} md={4} lg={4} xl={4} className="banner__right">
-            <BanerRight />
-          </Col>
-        </Row>
-      </div>
-      <div className="product__Container">
-        <div className="product__List">
-          {content !== null ? content : renderProducts()}
+    <Container className="my-4" style={{ maxWidth: "100%" }}>
+      <div className="product__Container_slider_introduction">
+        <div className="slider__Introduction">
+          <Row>
+            <Col xs={12} sm={12} md={8} lg={8} xl={8} className="banner__left">
+              {content !== null ? content : renderSliderIntroduction()}
+            </Col>
+            <Col xs={12} sm={12} md={4} lg={4} xl={4} className="banner__right">
+              <BanerRight />
+            </Col>
+          </Row>
         </div>
-        <div className="showMore">
-          {visibleProducts < products.length && (
-            <Button onClick={showMoreProducts}>Xem thêm</Button>
-          )}
+      </div>
+      <div className="product__Container_for_children">
+        <div className="product_for_children">
+          <div className="product__List">
+            {content !== null ? content : renderProducts()}
+          </div>
+        </div>
+      </div>
+      <div className="product__Container_for_mom">
+        <div className="slider__Introduction">
+          <Row>
+            <Col xs={12} sm={12} md={8} lg={8} xl={8} className="banner__left">
+              {content !== null ? content : renderSliderIntroduction()}
+            </Col>
+            <Col xs={12} sm={12} md={4} lg={4} xl={4} className="banner__right">
+              <BanerRight />
+            </Col>
+          </Row>
+        </div>
+        <div className="product_for_Mom">
+          <div className="product__List">
+            {content !== null ? content : renderProducts()}
+          </div>
+        </div>
+      </div>
+      <div className="product__Container_for_men">
+        <div className="slider__Introduction">
+          <Row>
+            <Col xs={12} sm={12} md={8} lg={8} xl={8} className="banner__left">
+              {content !== null ? content : renderSliderIntroduction()}
+            </Col>
+            <Col xs={12} sm={12} md={4} lg={4} xl={4} className="banner__right">
+              <BanerRight />
+            </Col>
+          </Row>
+        </div>
+        <div className="product_for_Men">
+          <div className="product__List">
+            {content !== null ? content : renderProducts()}
+          </div>
+        </div>
+      </div>
+      <div className="product__Container_for_women">
+        <div className="slider__Introduction">
+          <Row>
+            <Col xs={12} sm={12} md={8} lg={8} xl={8} className="banner__left">
+              {content !== null ? content : renderSliderIntroduction()}
+            </Col>
+            <Col xs={12} sm={12} md={4} lg={4} xl={4} className="banner__right">
+              <BanerRight />
+            </Col>
+          </Row>
+        </div>
+        <div className="product_for_Women">
+          <div className="product__List">
+            {content !== null ? content : renderProducts()}
+          </div>
         </div>
       </div>
     </Container>

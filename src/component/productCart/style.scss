@@ -4,10 +4,12 @@
 
 .product__card {
     height: 100%;
+    border: none;
 }
 
 /* Hiệu ứng scale nhỏ khi hover vào Card */
 .product__card:hover {
+    border: none;
     transform: scale(1.05);
     transition:
         transform 0.3s ease,

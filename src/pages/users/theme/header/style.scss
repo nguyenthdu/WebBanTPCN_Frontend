@@ -1,0 +1,81 @@
+@use "sass:map";
+@import "../../../../style/pages/theme.scss";
+.container__nav {
+    background-color: map.get($theme-colors, header);
+}
+
+.brand {
+    color: map.get($theme-colors, text);
+    width: 12%;
+}
+
+.brand__logo {
+    width: 100%;
+    object-fit: contain;
+}
+
+.brand:hover {
+    color: map.get($theme-colors, text);
+}
+
+#navbarScroll {
+    justify-content: flex-end;
+}
+
+.form__container {
+    background-color: #fff;
+    width: 50%;
+}
+
+.form__search {
+    border: none;
+}
+
+.form__search:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.btn__search {
+    border: none;
+    font-size: revert;
+    background-color: map.get($theme-colors, button);
+    color: #fff;
+}
+
+.btn__search:hover {
+    outline: none;
+    background-color: map.get($theme-colors, button);
+    color: #fff;
+}
+
+.btn {
+    border: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.icon__login,
+.icon__cart {
+    align-items: center;
+    background-color: transparent;
+    border: none;
+}
+
+.icon__login:active,
+.icon__cart:active {
+    background-color: transparent;
+    outline: none;
+}
+
+.icon__login:focus,
+.icon__cart:focus {
+    background-color: transparent;
+    outline: none;
+}
+
+.icon__login:hover,
+.icon__cart:hover {
+    background-color: transparent;
+    outline: none;
+}

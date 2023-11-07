@@ -1,0 +1,163 @@
+.custom-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    opacity: 0.5;
+}
+
+.custom-modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+}
+
+.custom-modal {
+    z-index: 100;
+    background: white;
+    position: relative;
+    margin: 1.75rem auto;
+    border-radius: 10px;
+    max-width: 28em;
+    padding: 2rem;
+}
+
+.custom-modal-header {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.custom-modal-close-button {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    opacity: 0.3;
+    cursor: pointer;
+    border: none;
+    background: white;
+}
+
+.custom-button {
+    font-size: 0.9rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 3px;
+    padding: 0.3rem 1rem;
+    margin-left: 0.5rem;
+}
+
+.custom-modal-body h5 {
+    text-align: center;
+    font-weight: 700;
+}
+
+.custom-modal-body .input-content {
+    width: 100%;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.username,
+.password,
+.btn__login {
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-bottom: 3%;
+}
+
+.btn__login {
+    border: none;
+}
+
+.span__forgot-password {
+    text-align: right;
+    margin-bottom: 2%;
+}
+
+.text__forgot {
+    cursor: pointer;
+}
+
+.icon__user,
+.icon__key {
+    font-size: 1.5em;
+    margin-right: 10px;
+}
+
+.btn__login--btn {
+    width: 100%;
+    border-radius: 20px;
+    border: none;
+    background-color: #2866e2;
+    justify-content: center;
+}
+
+.btn__login--btn:hover {
+    outline: none;
+    background-color: #2866e2;
+}
+
+.input__password,
+.input__username {
+    border: none;
+    width: 80%;
+    height: 2em;
+}
+
+.input__password:focus,
+.input__username:focus {
+    border: none;
+    outline: none;
+}
+
+.custom-modal-footer {
+    text-align: center;
+}
+
+.text__replace-login {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn__replace-login {
+    border: none;
+    background-color: transparent;
+    color: #2866e2;
+    font-weight: 700;
+    font-size: 1em;
+    margin-left: 5px;
+}
+
+.icon__google,
+.icon__facebook {
+    font-size: 1.5em;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    height: 1.5em;
+    width: 1.5em;
+    object-fit: contain;
+    border-radius: 90px;
+    cursor: pointer;
+}
+
+.icon__google:hover,
+.icon__facebook:hover {
+    transform: scale(1.1);
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease;
+}

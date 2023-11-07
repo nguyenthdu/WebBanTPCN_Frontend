@@ -8,22 +8,38 @@ import sliderIntroductionService from "../../../services/sliderIntroduction.serv
 import "./style.scss";
 
 const HomePage = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState({});
   const [visibleProducts, setVisibleProducts] = useState(10);
-  const [content, setContent] = useState(null); // chưa test được
-
+  const [content, setContent] = useState(null);
   const [sliderIntroduction, setSliderIntroduction] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const sliderData =
-          await sliderIntroductionService.getListSliderIntroduction();
-        setSliderIntroduction(sliderData); // Set the sliderIntroduction state with the fetched data
-        console.log(sliderIntroduction);
+        const [sliderData, foodData] = await Promise.all([
+          sliderIntroductionService.getListSliderIntroduction(),
+          foodFunctionService.getFoodList(),
+        ]);
 
-        const foodData = await foodFunctionService.getFoodList();
-        setProducts(foodData);
+        setSliderIntroduction(sliderData);
+
+        // Tạo một đối tượng để phân loại sản phẩm dựa trên từng đối tượng sử dụng
+        const categorizedUseObjectProducts = {};
+
+        foodData.forEach((element) => {
+          const obj = element.useObject;
+          for (let i = 0; i < obj.length; i++) {
+            // Kiểm tra xem categorizedUseObjectProducts có chứa thuộc tính tương ứng với đối tượng sử dụng hiện tại không
+            if (!categorizedUseObjectProducts.hasOwnProperty(obj[i])) {
+              // Nếu không tồn tại, tạo một mảng trống cho đối tượng sử dụng hiện tại. nhưng thực tế trường hợp này là không tồn tại
+              categorizedUseObjectProducts[obj[i]] = [];
+            }
+            // Sau đó, thêm sản phẩm hiện tại vào mảng của đối tượng sử dụng tương ứng
+            categorizedUseObjectProducts[obj[i]].push(element);
+          }
+        });
+
+        setProducts(categorizedUseObjectProducts);
       } catch (error) {
         const errorMessage =
           error.message || "An error occurred while fetching data";
@@ -32,22 +48,72 @@ const HomePage = () => {
     };
 
     fetchData();
-  }, []);
+  }, []); // Run once on initial load
 
-  // có thể sau này không cần dùng (vì nó được xử ở backend)
+  useEffect(() => {
+    console.log("xem loại trong 2: " + JSON.stringify(products));
+  }, [products]);
+
   const showMoreProducts = () => {
     setVisibleProducts((prevValue) => prevValue + 10);
   };
 
-  const renderProducts = () => {
+  const renderProducts = (category) => {
+    if (!category || !Array.isArray(products[category])) {
+      return null;
+    }
+    return (
+      <div className={`product__Container_for_${category}`}>
+        <div
+          className="tem_title__container"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            position: "relative",
+          }}
+        >
+          <Image
+            src="https://nhathuoclongchau.com.vn/static/images/san-pham-ban-chay.svg"
+            alt={`Sản phẩm cho ${category}`}
+            className="tem_img"
+            style={{ maxWidth: "100%", height: "auto", display: "block" }}
+          />
+          <h2
+            className="txt_h2"
+            style={{
+              position: "absolute",
+              left: "0",
+              bottom: "0",
+              width: "100%",
+              textAlign: "center",
+            }}
+          >{`Sản phẩm cho ${category}`}</h2>
+        </div>
+        <div
+          className={`product_for_${category}`}
+          style={{ maxWidth: 1320, margin: "auto" }}
+        >
+          <div className="product__List">{renderProductsList(category)}</div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderProductsList = (category) => {
+    // if (!category || !Array.isArray(products[category])) {
+    //   return null;
+    // }
+
+    const items = products[category];
     const rows = [];
     for (let i = 0; i < visibleProducts; i += 6) {
-      const rowProducts = products.slice(i, i + 6);
+      const rowProducts = items.slice(i, i + 6);
 
       rows.push(
         <Row key={i} xs={1} sm={2} md={3} lg={6} className="g-4">
           {rowProducts.map((product, index) => (
-            <ProductCard product={product} index={index} />
+            <ProductCard key={index} product={product} index={index} />
           ))}
         </Row>
       );
@@ -57,7 +123,6 @@ const HomePage = () => {
   };
 
   const renderSliderIntroduction = () => {
-    console.log(sliderIntroduction);
     return <Introduction introduction={sliderIntroduction} />;
   };
 
@@ -75,68 +140,10 @@ const HomePage = () => {
           </Row>
         </div>
       </div>
-      <div className="product__Container_for_children">
-        <div class="tem_title__container" gutter="[object Object]">
-          <Image
-            src="https://nhathuoclongchau.com.vn/static/images/san-pham-ban-chay.svg"
-            alt="Sản phẩm bán chạy"
-            className="tem_title"
-          />
-          <h2 className="txt_h2 spChild">Sản phẩm cho bé</h2>
-        </div>
-        <div className="product_for_children">
-          <div className="product__List">
-            {content !== null ? content : renderProducts()}
-          </div>
-        </div>
-      </div>
-      <div className="product__Container_for_mom">
-        <div class="tem_title__container" gutter="[object Object]">
-          <Image
-            src="https://nhathuoclongchau.com.vn/static/images/san-pham-ban-chay.svg"
-            alt="Sản phẩm cho mẹ"
-            className="tem_title"
-          />
-          <h2 className="txt_h2">Sản phẩm cho mẹ</h2>
-        </div>
-        <div className="product_for_Mom">
-          <div className="product__List">
-            {content !== null ? content : renderProducts()}
-          </div>
-        </div>
-      </div>
-      <div className="product__Container_for_men">
-        <div class="tem_title__container" gutter="[object Object]">
-          <Image
-            src="https://nhathuoclongchau.com.vn/static/images/san-pham-ban-chay.svg"
-            alt="Sản phẩm cho mẹ"
-            className="tem_title"
-          />
-          <h2 className="txt_h2 spMen" style={{ left: "44%" }}>
-            Sản phẩm cho nam
-          </h2>
-        </div>
-        <div className="product_for_Men">
-          <div className="product__List">
-            {content !== null ? content : renderProducts()}
-          </div>
-        </div>
-      </div>
-      <div className="product__Container_for_women">
-        <div class="tem_title__container" gutter="[object Object]">
-          <Image
-            src="https://nhathuoclongchau.com.vn/static/images/san-pham-ban-chay.svg"
-            alt="Sản phẩm cho mẹ"
-            className="tem_title"
-          />
-          <h2 className="txt_h2">Sản phẩm cho nữ</h2>
-        </div>
-        <div className="product_for_Women">
-          <div className="product__List">
-            {content !== null ? content : renderProducts()}
-          </div>
-        </div>
-      </div>
+      {renderProducts("children")}
+      {renderProducts("men")}
+      {renderProducts("women")}
+      {renderProducts("mom")}
     </Container>
   );
 };

@@ -1,3 +1,106 @@
+// .showMore {
+//     text-align: center;
+// }
+
+// .product__Container_slider_introduction {
+//     max-width: 100%;
+//     background-color: #f8f9fd;
+//     padding: 1em;
+// }
+
+// .slider__Introduction {
+//     display: flex;
+//     flex-direction: row;
+//     max-width: 1320px;
+//     margin: auto;
+// }
+
+// .product__Container_for_children {
+//     max-width: 100%;
+//     background-color: #fcf3e8;
+//     padding: 1em;
+// }
+
+// .product_for_children {
+//     display: flex;
+//     flex-direction: row;
+//     max-width: 1320px;
+//     margin: auto;
+// }
+
+// .product__Container_for_mom {
+//     max-width: 100%;
+//     background-color: #e5eeff;
+//     padding: 1em;
+// }
+
+// .product_for_Mom {
+//     display: flex;
+//     flex-direction: row;
+//     max-width: 1320px;
+//     margin: auto;
+// }
+
+// .img__banner_for_mom,
+// .img__banner_for_men {
+//     padding: 1%;
+//     width: 100%;
+//     height: auto;
+//     object-fit: contain;
+// }
+
+// .product__Container_for_men {
+//     max-width: 100%;
+//     background-color: #f4e2ce;
+//     padding: 1em;
+// }
+
+// .product_for_Men {
+//     display: flex;
+//     flex-direction: row;
+//     max-width: 1320px;
+//     margin: auto;
+// }
+
+// .product__Container_for_women {
+//     max-width: 100%;
+//     background-color: #fcf3e8;
+//     padding: 1em;
+// }
+
+// .product_for_Women {
+//     display: flex;
+//     flex-direction: row;
+//     max-width: 1320px;
+//     margin: auto;
+// }
+
+// .advise__container {
+//     background-color: pink;
+//     margin-bottom: 4%;
+//     width: 30%;
+// }
+
+// .tem_title__container {
+//     position: relative;
+//     bottom: -0.85em;
+//     margin-bottom: 2%;
+// }
+
+// .tem_title {
+//     position: absolute;
+//     bottom: -13%;
+//     left: 40%;
+// }
+
+// .txt_h2 {
+//     position: absolute;
+//     color: #fff;
+//     left: 45%;
+//     font-size: 24px;
+//     bottom: -13%;
+// }
+
 .showMore {
     text-align: center;
 }
@@ -6,6 +109,7 @@
     max-width: 100%;
     background-color: #f8f9fd;
     padding: 1em;
+    margin-top: 1em;
 }
 
 .slider__Introduction {
@@ -15,26 +119,33 @@
     margin: auto;
 }
 
-.product__Container_for_children {
+.product__Container {
     max-width: 100%;
-    background-color: #fcf3e8;
     padding: 1em;
-}
-
-.product_for_children {
     display: flex;
     flex-direction: row;
     max-width: 1320px;
     margin: auto;
+    background-color: #fcf3e8;
+}
+
+.product__Container_for_children {
+    background-color: #fcf3e8;
 }
 
 .product__Container_for_mom {
-    max-width: 100%;
     background-color: #e5eeff;
-    padding: 1em;
 }
 
-.product_for_Mom {
+.product__Container_for_men {
+    background-color: #f4e2ce;
+}
+
+.product__Container_for_women {
+    background-color: #fcf3e8;
+}
+
+.product_for {
     display: flex;
     flex-direction: row;
     max-width: 1320px;
@@ -49,32 +160,6 @@
     object-fit: contain;
 }
 
-.product__Container_for_men {
-    max-width: 100%;
-    background-color: #f4e2ce;
-    padding: 1em;
-}
-
-.product_for_Men {
-    display: flex;
-    flex-direction: row;
-    max-width: 1320px;
-    margin: auto;
-}
-
-.product__Container_for_women {
-    max-width: 100%;
-    background-color: #fcf3e8;
-    padding: 1em;
-}
-
-.product_for_Women {
-    display: flex;
-    flex-direction: row;
-    max-width: 1320px;
-    margin: auto;
-}
-
 .advise__container {
     background-color: pink;
     margin-bottom: 4%;
@@ -82,21 +167,16 @@
 }
 
 .tem_title__container {
-    position: relative;
-    bottom: -0.85em;
-    margin-bottom: 2%;
+    bottom: 0.7em;
 }
 
-.tem_title {
-    position: absolute;
-    bottom: -13%;
-    left: 40%;
+.tem_img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 .txt_h2 {
-    position: absolute;
     color: #fff;
-    left: 45%;
     font-size: 24px;
-    bottom: -13%;
 }

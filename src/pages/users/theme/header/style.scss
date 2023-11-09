@@ -10,8 +10,14 @@
 }
 
 .brand__logo {
+    // Kích thước mặc định cho logo
     width: 100%;
     object-fit: contain;
+
+    // Sử dụng media query để thay đổi kích thước ở màn hình nhỏ
+    @media (max-width: 768px) {
+        min-width: 4em; // Đặt kích thước mong muốn cho màn hình nhỏ
+    }
 }
 
 .brand:hover {
@@ -25,6 +31,7 @@
 .form__container {
     background-color: #fff;
     width: 50%;
+    margin: auto;
 }
 
 .form__search {
@@ -47,6 +54,10 @@
     outline: none;
     background-color: map.get($theme-colors, button);
     color: #fff;
+}
+
+.icon__search {
+    color: #000;
 }
 
 .btn {

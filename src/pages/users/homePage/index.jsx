@@ -50,9 +50,9 @@ const HomePage = () => {
     fetchData();
   }, []); // Run once on initial load
 
-  useEffect(() => {
-    console.log("xem loại trong 2: " + JSON.stringify(products));
-  }, [products]);
+  // useEffect(() => {
+  //   console.log("xem loại trong 2: " + JSON.stringify(products));
+  // }, [products]);
 
   const showMoreProducts = () => {
     setVisibleProducts((prevValue) => prevValue + 10);

@@ -1,0 +1,28 @@
+@use "sass:map";
+@import "../../../style/pages/theme.scss";
+
+.custom-container {
+    background-color: map.get($theme-colors, nen);
+    width: 100%;
+}
+
+.product-detail-container {
+    margin: auto;
+    padding: 10px;
+    background-color: map.get($theme-colors, nensp);
+    width: 65%;
+    border-radius: 10px;
+}
+
+.btn-buy {
+    width: 50%;
+    padding: 2%;
+    border-radius: 50px;
+    color: map.get($theme-colors, txt);
+    background-color: map.get($theme-colors, btn);
+    border: none;
+}
+
+.btn-buy:active {
+    background-color: #2155c6;
+}

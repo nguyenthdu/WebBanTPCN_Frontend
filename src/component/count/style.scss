@@ -1,0 +1,28 @@
+.txt-count {
+    color: gray;
+}
+
+.c-count {
+    border: 1px solid gray;
+    border-radius: 20px;
+}
+
+.btn-left,
+.btn-right {
+    border: none;
+    background: none;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.counter-input {
+    // border: none;
+    border-top: none;
+    border-bottom: none;
+    width: 50px;
+    text-align: center;
+}
+
+.counter-input:focus {
+    border: none;
+}

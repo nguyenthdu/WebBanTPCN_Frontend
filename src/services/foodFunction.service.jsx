@@ -14,6 +14,21 @@ const getFoodList = () => {
   });
 };
 
-const foodFunctionService = { getFoodList };
+const getFood = (id) => {
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow",
+  };
+  return fetch(API_URL + "foodFunction/" + id, requestOptions).then(
+    (response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    }
+  );
+};
+
+const foodFunctionService = { getFoodList, getFood };
 
 export default foodFunctionService;

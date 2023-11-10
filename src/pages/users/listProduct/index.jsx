@@ -1,9 +1,9 @@
 import { memo, useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 // import Icon from "react-icon";
-import axios from "axios";
 import { FaCheck, FaFilter, FaList, FaTh } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import foodFunctionService from "../../../services/foodFunction.service";
 import "./style.scss";
 
 const ListProduct = () => {
@@ -42,16 +42,28 @@ const ListProduct = () => {
 
   // }, [selectedList]);
 
+  const { textSearch } = useParams();
+
+  const [content, setContent] = useState(null);
+
   useEffect(() => {
-    axios
-      .get("https://random-data-api.com/api/v2/users?size=29&is_xml=true")
-      .then((response) => {
-        setProducts(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+    console.log(textSearch);
+    const fetchData = async () => {
+      try {
+        const [response] = await Promise.all([
+          foodFunctionService.getFoodByName(textSearch),
+        ]);
+        setProducts(response);
+        console.log("trong list product: " + products);
+      } catch (error) {
+        const errorMessage =
+          error.message || "An error occurred while fetching data";
+        setContent(errorMessage);
+      }
+    };
+
+    fetchData();
+  }, [textSearch]);
 
   const showMoreProducts = () => {
     setVisibleProducts((prevValue) => prevValue + 12);

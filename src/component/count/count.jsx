@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import "./style.scss";
 
-function Count() {
+function Count({ hidden }) {
+  console.log("hidden: " + hidden.hidden);
   const [count, setCount] = useState(1);
 
   const handleIncrement = () => {
@@ -28,7 +29,9 @@ function Count() {
 
   return (
     <div className="counter d-flex align-items-center">
-      <h5 className="txt-count pe-3 ps-3">Chọn số lượng: </h5>
+      {hidden === "0" ? (
+        <h5 className="txt-count pe-3 ps-3">Chọn số lượng: </h5>
+      ) : null}
       <div className="c-count d-flex align-items-center">
         <FaMinus
           className="icon-count m-2"

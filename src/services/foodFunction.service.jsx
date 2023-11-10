@@ -29,6 +29,38 @@ const getFood = (id) => {
   );
 };
 
-const foodFunctionService = { getFoodList, getFood };
+// const getSearchFood = (name) => {
+//   const requestOptions = { method: "GET", redirect: "follow" };
+//   const searchURL = API_URL + "foodFunction/?name=" + name;
+//   return fetch(searchURL, requestOptions).then((response) => {
+//     if (!response.ok) {
+//       throw new Error("Network response was not ok");
+//     }
+//     console.log("trong service: " + JSON.stringify(response.json()));
+//     return response.json();
+//   });
+// };
+
+const getFoodByName = (name) => {
+  const url =
+    "https://shopeeapi2.p.rapidapi.com/id/search?q=Keripik%20Kentang&p=1";
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "SIGN-UP-FOR-KEY",
+      "X-RapidAPI-Host": "shopeeapi2.p.rapidapi.com",
+    },
+  };
+
+  return fetch(url, requestOptions).then((response) => {
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    console.log("trong service: " + JSON.stringify(response.json()));
+    return response.json();
+  });
+};
+
+const foodFunctionService = { getFoodList, getFood, getFoodByName };
 
 export default foodFunctionService;

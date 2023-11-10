@@ -1,0 +1,49 @@
+@use "sass:map";
+@import "../../style/pages/theme.scss";
+
+.summary {
+    background-color: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.summary .summary-item:last-of-type {
+    font-size: 1.1em;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1em;
+}
+
+.summary button {
+    margin: 1em;
+}
+
+// @media (min-width: 768px) {
+//     .items .product .info {
+//         padding-top: 25px;
+//         text-align: left;
+//     }
+
+//     .items .product .info .price {
+//         font-weight: bold;
+//         font-size: 22px;
+//         top: 17px;
+//     }
+
+//     .items .product .info .quantity {
+//         text-align: center;
+//     }
+//     .items .product .info .quantity .quantity-input {
+//         padding: 4px 10px;
+//         text-align: center;
+//     }
+// }

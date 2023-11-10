@@ -10,6 +10,7 @@ import Count from "../../../component/count/count";
 import CustomTab from "../../../component/tab/tab";
 
 const ProductDetail = () => {
+  const hidden = { hidden: "0" };
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [content, setContent] = useState(null);
@@ -20,7 +21,7 @@ const ProductDetail = () => {
       try {
         const [foodData] = await Promise.all([foodFunctionService.getFood(id)]);
         setProductData(foodData);
-        console.log("chi tiet san pham id: " + JSON.stringify(foodData));
+        console.log("trong detail id: " + JSON.stringify(foodData));
       } catch (error) {
         const errorMessage =
           error.message || "An error occurred while fetching data";
@@ -49,7 +50,7 @@ const ProductDetail = () => {
                 <InformationProduct productData={productData} />
                 <div className="btn-buy-cart">
                   <div className="count">
-                    <Count />
+                    <Count hidden={hidden} />
                   </div>
                   <button className="btn-buy">
                     <h5 className="txt-buy" style={{ marginBottom: "unset" }}>
@@ -69,7 +70,7 @@ const ProductDetail = () => {
                 <InformationProduct productData={productData} />
                 <div className="btn-buy-cart">
                   <div className="count">
-                    <Count />
+                    <Count hidden={hidden} />
                   </div>
                   <button className="btn-buy mt-2">
                     <h5 className="txt-buy" style={{ marginBottom: "unset" }}>

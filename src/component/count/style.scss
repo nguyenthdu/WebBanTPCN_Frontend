@@ -1,0 +1,30 @@
+.txt-count {
+    color: gray;
+}
+
+.c-count {
+    border: 1px solid gray;
+    border-radius: 20px;
+    height: 2em;
+    user-select: none;
+}
+
+.c-count input {
+    border: 1px solid gray;
+    outline: none;
+    width: 50px;
+    text-align: center;
+    height: inherit;
+}
+
+.btn-left,
+.btn-right {
+    border: none;
+    background: none;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.icon-count {
+    cursor: pointer;
+}

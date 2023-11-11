@@ -1,0 +1,16 @@
+.title {
+    color: gray;
+    min-width: max-content;
+    margin-right: 10px;
+    flex: 1;
+}
+
+.txt-use-object,
+.txt-brand,
+.txt-category,
+.txt-description {
+    flex: 2;
+}
+.txt-price {
+    color: #1250dc;
+}

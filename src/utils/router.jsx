@@ -4,7 +4,7 @@ export const ROUTERS = {
     HOME: process.env.IS_PROD ? "/" : "",
     PROFILE: "/profile",
     PRODUCT_DETAIL: "/product/:id",
-    LIST_PRODUCT: "/listProduct",
+    LIST_PRODUCT: "/listProduct/:name",
     CART: "/cart",
     NOTFOUNDPAGE: "*",
   },

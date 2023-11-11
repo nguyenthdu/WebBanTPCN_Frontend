@@ -1,0 +1,67 @@
+@use "sass:map";
+@import "../../../style/pages/theme.scss";
+
+.custom-container {
+    background-color: map.get($theme-colors, nen);
+    width: 100%;
+}
+
+.product-detail-container {
+    margin: auto;
+    padding: 10px;
+    background-color: map.get($theme-colors, nensp);
+    border-radius: 10px;
+
+    @media (max-width: 767px) {
+        width: 100%;
+    }
+
+    @media (min-width: 768px) {
+        width: 65%;
+    }
+}
+
+// .product-detail-col {
+//     max-height: 30em;
+// }
+
+.product-image {
+    border-radius: 10px;
+    background-color: map.get($theme-colors, nensp);
+}
+
+// .product-infor {
+//     max-height: inherit;
+//     // overflow: auto;
+//     // overscroll-behavior-y: contain;
+//     // scrollbar: ;
+// }
+
+.btn-buy {
+    width: 50%;
+    padding: 2%;
+    border-radius: 50px;
+    color: map.get($theme-colors, txt);
+    background-color: map.get($theme-colors, btn);
+    border: none;
+    user-select: none;
+}
+
+.btn-buy:active {
+    background-color: #2155c6;
+}
+
+.custom-tab-container {
+    margin: 1em auto;
+    padding: 10px;
+    background-color: map.get($theme-colors, nensp);
+    border-radius: 10px;
+
+    @media (max-width: 767px) {
+        width: 100%;
+    }
+
+    @media (min-width: 768px) {
+        width: 65%;
+    }
+}

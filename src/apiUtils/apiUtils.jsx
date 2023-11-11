@@ -19,13 +19,15 @@ const requestOptions = {
 
 // Common API utility using Fetch
 export const apiUtils = {
-  request: async (endpoint, method = "GET", data) => {
+  request: async (endpoint, method = "GET", data, customConfig = {}) => {
     const options = {
       ...requestOptions,
       method,
       headers: {
         "Content-Type": "application/json",
+        ...customConfig.headers, // tùy chỉnh
       },
+      ...customConfig,
     };
 
     if (data) {
@@ -41,6 +43,9 @@ export const apiUtils = {
     }
   },
 };
+
+// Đối với Fetch API
+// apiUtils.request('/products', 'GET', null, { headers: { 'Authorization': 'Bearer YOUR_TOKEN' } });
 
 // Function to call the API using Axios
 // export const callApi = async (endpoint, method = 'GET', body) => {

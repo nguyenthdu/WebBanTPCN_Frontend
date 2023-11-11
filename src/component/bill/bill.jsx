@@ -23,8 +23,8 @@ function Bill() {
             $360
           </span>
         </div>
-        <button type="button" class="btn btn-primary btn-lg btn-block">
-          Checkout
+        <button type="button" class="btn-lg btn-block btn-mua-hang">
+          Mua hàng
         </button>
       </div>
     </div>

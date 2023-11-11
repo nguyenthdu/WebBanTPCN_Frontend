@@ -6,7 +6,6 @@ import Count from "../count/count";
 import "./style.scss";
 
 function CartProductCard({ product, index }) {
-  const hidden = { hidden: "1" };
   return (
     <Col key={index} className="mb-3 col-12">
       <div className="custom-card">
@@ -25,15 +24,15 @@ function CartProductCard({ product, index }) {
           </Link>
           <Col lg={5}>
             <div className="custom-counter d-flex">
-              <p className="price col-7" style={{ marginBottom: 0 }}>
+              <p className="price col-5" style={{ marginBottom: 0 }}>
                 Giá:{" "}
                 {product.price.toLocaleString("vi", {
                   style: "currency",
                   currency: "VND",
                 })}
               </p>
-              <Count className="col-3" hidden={hidden} />
-              <div className="custom-trash col-2">
+              <Count className="col-3" hidden={0} />
+              <div className="custom-trash col-4">
                 <Trash className="icon-trash" />
               </div>
             </div>

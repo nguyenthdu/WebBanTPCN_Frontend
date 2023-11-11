@@ -8,12 +8,18 @@ import "./style.scss";
 
 import Count from "../../../component/count/count";
 import CustomTab from "../../../component/tab/tab";
+import useShoppingCart from "../../../hook/shoppingCart/useShoppingCart";
 
 const ProductDetail = () => {
-  const hidden = { hidden: "0" };
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [content, setContent] = useState(null);
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
+  const { addToCart } = useShoppingCart();
+
+  const handleCountChange = (newCount) => {
+    setSelectedQuantity(newCount);
+  };
 
   // Fetch data for the specific product ID
   useEffect(() => {
@@ -31,6 +37,10 @@ const ProductDetail = () => {
 
     fetchData();
   }, [id]); // Thêm dependency 'id' để useEffect chạy khi id thay đổi
+
+  const handleAddToCart = () => {
+    addToCart(productData, selectedQuantity);
+  };
 
   // Render product details when data is available
   if (productData) {
@@ -50,9 +60,9 @@ const ProductDetail = () => {
                 <InformationProduct productData={productData} />
                 <div className="btn-buy-cart">
                   <div className="count">
-                    <Count hidden={hidden} />
+                    <Count hidden={1} countValue={handleCountChange} />
                   </div>
-                  <button className="btn-buy">
+                  <button className="btn-buy" onClick={handleAddToCart}>
                     <h5 className="txt-buy" style={{ marginBottom: "unset" }}>
                       Chọn mua
                     </h5>
@@ -70,9 +80,9 @@ const ProductDetail = () => {
                 <InformationProduct productData={productData} />
                 <div className="btn-buy-cart">
                   <div className="count">
-                    <Count hidden={hidden} />
+                    <Count hidden={1} countValue={handleCountChange} />
                   </div>
-                  <button className="btn-buy mt-2">
+                  <button className="btn-buy mt-2" onClick={handleAddToCart}>
                     <h5 className="txt-buy" style={{ marginBottom: "unset" }}>
                       Chọn mua
                     </h5>

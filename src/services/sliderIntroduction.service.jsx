@@ -1,7 +1,8 @@
-import { apiUtils } from "../apiUtils/apiUtils";
+import { apiUtilsSLIDER } from "../apiUtils/apiUtils";
 
 const sliderIntroductionService = {
-  getListSliderIntroduction: () => apiUtils.request("slideIntroduction", "GET"),
+  getListSliderIntroduction: () =>
+    apiUtilsSLIDER.request("slideIntroduction", "GET"),
 };
 
 export default sliderIntroductionService;

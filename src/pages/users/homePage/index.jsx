@@ -1,126 +1,81 @@
 import { memo, useEffect, useState } from "react";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+import ListProduct from "../../../component/ListProduct/ListProduct";
+import Loading from "../../../component/Loading/Loading";
 import BanerRight from "../../../component/introduction/banerRight";
 import Introduction from "../../../component/introduction/introduction";
-import ProductCard from "../../../component/productCart/productCard";
 import foodFunctionService from "../../../services/foodFunction.service";
-import sliderIntroductionService from "../../../services/sliderIntroduction.service";
 import "./style.scss";
 
 const HomePage = () => {
-  const [products, setProducts] = useState({});
-  const [visibleProducts, setVisibleProducts] = useState(10);
+  const [products, setProducts] = useState();
+  // const [visibleProducts, setVisibleProducts] = useState(10);
   const [content, setContent] = useState(null);
-  const [sliderIntroduction, setSliderIntroduction] = useState([]);
+  const slider = [
+    {
+      name: "name 1",
+      image: "http://surl.li/njjxn",
+      id: "1",
+    },
+    {
+      name: "name 2",
+      image: "http://surl.li/njjya",
+      id: "2",
+    },
+    {
+      name: "name 3",
+      image: "http://surl.li/njjyo",
+      id: "3",
+    },
+  ];
+  const [sliderIntroduction, setSliderIntroduction] = useState(slider);
 
+  const getImageBase64 = (imageFiles) => {
+    if (Array.isArray(imageFiles) && imageFiles.length > 0) {
+      // Lặp qua từng ảnh trong mảng imageFiles
+      const imagesBase64 = imageFiles.map((image) => {
+        return `data:image/jpeg;base64,${image.picByte}`;
+      });
+
+      return imagesBase64;
+    }
+    return null;
+  };
+
+  // Hàm lấy dữ liệu từ API
   useEffect(() => {
+    // Thực hiện chỉ một lần khi component được tạo ra
     const fetchData = async () => {
       try {
-        const [sliderData, foodData] = await Promise.all([
-          sliderIntroductionService.getListSliderIntroduction(),
-          foodFunctionService.getFoodList(),
-        ]);
-
-        setSliderIntroduction(sliderData);
-
-        // Tạo một đối tượng để phân loại sản phẩm dựa trên từng đối tượng sử dụng
-        const categorizedUseObjectProducts = {};
-
-        foodData.forEach((element) => {
-          const obj = element.useObject;
-          for (let i = 0; i < obj.length; i++) {
-            // Kiểm tra xem categorizedUseObjectProducts có chứa thuộc tính tương ứng với đối tượng sử dụng hiện tại không
-            if (!categorizedUseObjectProducts.hasOwnProperty(obj[i])) {
-              // Nếu không tồn tại, tạo một mảng trống cho đối tượng sử dụng hiện tại. nhưng thực tế trường hợp này là không tồn tại
-              categorizedUseObjectProducts[obj[i]] = [];
-            }
-            // Sau đó, thêm sản phẩm hiện tại vào mảng của đối tượng sử dụng tương ứng
-            categorizedUseObjectProducts[obj[i]].push(element);
-          }
+        const response = await foodFunctionService.getFoodList();
+        // Lấy base64 từ imageFiles
+        const newProducts = response.map((product) => {
+          const imageBase64 = getImageBase64(product.imageFiles);
+          return { ...product, imageBase64 };
         });
 
-        setProducts(categorizedUseObjectProducts);
+        // Gắn lại vào products
+        setProducts(newProducts);
+
+        // In ra màn hình để kiểm tra
+        console.log("Updated Products: ", newProducts);
       } catch (error) {
-        const errorMessage =
-          error.message || "An error occurred while fetching data";
-        setContent(errorMessage);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-  }, []); // Run once on initial load
+  }, []); // Mảng phụ thuộc trống để chỉ chạy một lần
 
-  // useEffect(() => {
-  //   console.log("xem loại trong 2: " + JSON.stringify(products));
-  // }, [products]);
-
-  const showMoreProducts = () => {
-    setVisibleProducts((prevValue) => prevValue + 10);
-  };
-
-  const renderProducts = (category) => {
-    if (!category || !Array.isArray(products[category])) {
-      return null;
+  useEffect(() => {
+    if (Array.isArray(products)) {
+      const imageBase64 = products[0].imageFiles[0].picByte;
+      // Tạo URL dữ liệu từ dữ liệu base64
+      const imageUrl = `data:image/jpeg;base64,${imageBase64}`;
+      // console.log("home: " + imageUrl);
     }
-    return (
-      <div className={`product__Container_for_${category}`}>
-        <div
-          className="tem_title__container"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            position: "relative",
-          }}
-        >
-          <Image
-            src="https://nhathuoclongchau.com.vn/static/images/san-pham-ban-chay.svg"
-            alt={`Sản phẩm cho ${category}`}
-            className="tem_img"
-            style={{ maxWidth: "100%", height: "auto", display: "block" }}
-          />
-          <h2
-            className="txt_h2"
-            style={{
-              position: "absolute",
-              left: "0",
-              bottom: "0",
-              width: "100%",
-              textAlign: "center",
-            }}
-          >{`Sản phẩm cho ${category}`}</h2>
-        </div>
-        <div
-          className={`product_for_${category}`}
-          style={{ maxWidth: 1320, margin: "auto" }}
-        >
-          <div className="product__List">{renderProductsList(category)}</div>
-        </div>
-      </div>
-    );
-  };
-
-  const renderProductsList = (category) => {
-    // if (!category || !Array.isArray(products[category])) {
-    //   return null;
-    // }
-
-    const items = products[category];
-    const rows = [];
-    for (let i = 0; i < visibleProducts; i += 6) {
-      const rowProducts = items.slice(i, i + 6);
-
-      rows.push(
-        <Row key={i} xs={1} sm={2} md={3} lg={6} className="g-4">
-          {rowProducts.map((product, index) => (
-            <ProductCard key={index} product={product} index={index} />
-          ))}
-        </Row>
-      );
-    }
-
-    return rows;
-  };
+    console.log("xem trong homepage: " + products);
+  }, [products]);
 
   const renderSliderIntroduction = () => {
     return <Introduction introduction={sliderIntroduction} />;
@@ -140,10 +95,17 @@ const HomePage = () => {
           </Row>
         </div>
       </div>
-      {renderProducts("children")}
-      {renderProducts("men")}
-      {renderProducts("women")}
-      {renderProducts("mom")}
+      <div className="loadinggg-container">
+        <div className="loadinggg">
+          {Array.isArray(products) && products.length > 0 ? (
+            <ListProduct list={products} />
+          ) : (
+            <div className="custom-loading">
+              <Loading />
+            </div>
+          )}
+        </div>
+      </div>
     </Container>
   );
 };

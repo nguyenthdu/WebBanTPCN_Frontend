@@ -13,11 +13,15 @@ import { Cart2, Person, Search } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../../../../component/login/loginModal";
 import UserMenu from "../../../../component/userMenu/userMenu";
+import { useCartContext } from "../../../../context/cartContext/cartContext";
 import useModal from "../../../../hook/modal/useModal";
 import AuthService from "../../../../services/auth.service";
 import "./style.scss";
 
 function Header() {
+  // Sử dụng hook từ ShopContext để lấy thông tin về giỏ hàng
+  const { carts } = useCartContext();
+
   const currentUser = AuthService.getCurrentUser();
   console.log("header clg info user in local: " + currentUser);
   const { isShowing, toggle } = useModal();
@@ -77,6 +81,13 @@ function Header() {
               )}
               <Button className="mx-2 icon__cart" onClick={handleCart}>
                 <Cart2 className="me-2" />
+                {/* Hiển thị số lượng sản phẩm trong giỏ hàng
+                 */}
+                {carts.length > 0 ? (
+                  <p className="absolute top-[-10px] right-[-10px] text-xs font-bold">
+                    {carts.length}
+                  </p>
+                ) : null}
                 Giỏ Hàng
               </Button>
             </div>

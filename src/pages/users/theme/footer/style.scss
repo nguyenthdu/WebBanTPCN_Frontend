@@ -1,0 +1,58 @@
+.footer {
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 70px;
+
+    h2 {
+        font-size: 22px;
+        font-weight: bold;
+        padding-bottom: 20px;
+    }
+
+    .OurAwards {
+        p {
+            font-size: 18px;
+            color: rgb(187, 185, 185);
+        }
+        img {
+            width: 80%;
+        }
+    }
+
+    .ContactInfo {
+        span {
+            font-size: 18px;
+            color: rgb(187, 185, 185);
+            i {
+                padding-right: 10px;
+                margin-bottom: 10px;
+            }
+        }
+        .socialMedia {
+            i {
+                padding: 15px;
+                font-size: 34px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .RecentTrips {
+        img {
+            cursor: pointer;
+            padding-bottom: 10px;
+            padding-right: -32px;
+            border-radius: 20px;
+        }
+    }
+
+    .MenuFooter {
+        cursor: pointer;
+        text-align: right;
+        span {
+            margin: 10px;
+            color: rgb(187, 185, 185);
+        }
+    }
+}

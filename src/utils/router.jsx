@@ -8,4 +8,9 @@ export const ROUTERS = {
     CART: "/cart",
     NOTFOUNDPAGE: "*",
   },
+  ADMIN: {
+    CRUD: "/admin/crud",
+    USER: "/admin/user",
+    NOTFOUNDPAGE: "*",
+  },
 };

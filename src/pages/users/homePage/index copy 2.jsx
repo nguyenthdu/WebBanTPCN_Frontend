@@ -1,11 +1,11 @@
-import { memo, useEffect, useState } from "react";
-import { Col, Container, Image, Row } from "react-bootstrap";
-import BanerRight from "../../../component/introduction/banerRight";
-import Introduction from "../../../component/introduction/introduction";
-import ProductCard from "../../../component/productCart/productCard";
-import foodFunctionService from "../../../services/foodFunction.service";
-import sliderIntroductionService from "../../../services/sliderIntroduction.service";
-import "./style.scss";
+// import { memo, useEffect, useState } from "react";
+// import { Col, Container, Image, Row } from "react-bootstrap";
+// import BanerRight from "../../../component/introduction/banerRight";
+// import Introduction from "../../../component/introduction/introduction";
+// import ProductCard from "../../../component/productCart/productCard";
+// import foodFunctionService from "../../../services/foodFunction.service";
+// import sliderIntroductionService from "../../../services/sliderIntroduction.service";
+// import "./style.scss";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);

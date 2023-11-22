@@ -7,6 +7,7 @@
     background-color: #f8f9fd;
     padding: 1em;
     margin-top: 1em;
+    border-radius: 10px;
 }
 
 .slider__Introduction {
@@ -16,64 +17,18 @@
     margin: auto;
 }
 
-.product__Container {
-    max-width: 100%;
-    padding: 1em;
-    display: flex;
-    flex-direction: row;
-    max-width: 1320px;
-    margin: auto;
-    background-color: #fcf3e8;
+.loadinggg-container {
+    background-color: #d5e3fe;
+    margin-top: 0.5em;
+    padding: 1em 0;
+    border-radius: 10px;
 }
 
-.product__Container_for_children {
-    background-color: #fcf3e8;
-}
-
-.product__Container_for_mom {
-    background-color: #e5eeff;
-}
-
-.product__Container_for_men {
-    background-color: #f4e2ce;
-}
-
-.product__Container_for_women {
-    background-color: #fcf3e8;
-}
-
-.product_for {
-    display: flex;
-    flex-direction: row;
+.loadinggg {
     max-width: 1320px;
     margin: auto;
 }
 
-.img__banner_for_mom,
-.img__banner_for_men {
-    padding: 1%;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-}
-
-.advise__container {
-    background-color: pink;
-    margin-bottom: 4%;
-    width: 30%;
-}
-
-.tem_title__container {
-    bottom: 0.7em;
-}
-
-.tem_img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-.txt_h2 {
-    color: #fff;
-    font-size: 24px;
+.custom-loading {
+    text-align: center;
 }

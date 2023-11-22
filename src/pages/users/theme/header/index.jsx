@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   CardHeader,
@@ -10,24 +10,47 @@ import {
   Navbar,
 } from "react-bootstrap";
 import { Cart2, Person, Search } from "react-bootstrap-icons";
+import { BsPersonWorkspace } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../../../../component/login/loginModal";
 import UserMenu from "../../../../component/userMenu/userMenu";
+import { useCartContext } from "../../../../context/cartContext/cartContext";
 import useModal from "../../../../hook/modal/useModal";
 import AuthService from "../../../../services/auth.service";
 import "./style.scss";
 
 function Header() {
-  const currentUser = AuthService.getCurrentUser();
-  console.log("header clg info user in local: " + currentUser);
+  // Sử dụng hook từ ShopContext để lấy thông tin về giỏ hàng
+  const { carts } = useCartContext();
+  // State quản lý thông tin và vai trò của người dùng
+  const [showAdminBoard, setShowAdminBoard] = useState(false);
+
   const { isShowing, toggle } = useModal();
   var logo = require("../../../../assets/logo-iuh.png");
 
   const [textSearch, setTextSearch] = useState("");
   const navigate = useNavigate();
 
+  const currentUser = AuthService.getCurrentUser();
+
+  useEffect(() => {
+    if (currentUser) {
+      setShowAdminBoard(currentUser.role.includes("ADMIN")); // Kiểm tra xem user có phải là admin
+    }
+  }, []);
+
+  // Function to log out the user
+  // const logOut = () => {
+  //   AuthService.logout();
+  //   setShowAdminBoard(false);
+  // };
+
   const handleSearch = () => {
     navigate(`/listProduct/${textSearch}`);
+  };
+
+  const handleAdmin = () => {
+    navigate("/admin/crud");
   };
 
   const handleCart = () => {
@@ -67,6 +90,13 @@ function Header() {
               </Button>
             </Form>
             <div className="btn">
+              {showAdminBoard ? (
+                <Button className="mx-2 icon__manager" onClick={handleAdmin}>
+                  {/* icon react bootstrap quản lý*/}
+                  <BsPersonWorkspace className="me-2" />
+                  Quản lý
+                </Button>
+              ) : null}
               {currentUser ? (
                 <UserMenu currentUser={currentUser} />
               ) : (
@@ -77,6 +107,13 @@ function Header() {
               )}
               <Button className="mx-2 icon__cart" onClick={handleCart}>
                 <Cart2 className="me-2" />
+                {/* Hiển thị số lượng sản phẩm trong giỏ hàng
+                 */}
+                {carts.length > 0 ? (
+                  <p className="absolute top-[-10px] right-[-10px] text-xs font-bold">
+                    {carts.length}
+                  </p>
+                ) : null}
                 Giỏ Hàng
               </Button>
             </div>

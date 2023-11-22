@@ -1,3 +1,6 @@
+// Đặt các route quản trị trong một nhóm hoặc prefix
+export const ADMIN_ROUTES_PREFIX = "/admin"; // để qua bên masterlay nó sẽ kiểm tra xem có này thì ok có sidebar
+
 // This file contains all the routes of the application
 export const ROUTERS = {
   USER: {
@@ -9,8 +12,8 @@ export const ROUTERS = {
     NOTFOUNDPAGE: "*",
   },
   ADMIN: {
-    CRUD: "/admin/crud",
-    USER: "/admin/user",
+    CRUD: `${ADMIN_ROUTES_PREFIX}/crud`,
+    USER: `${ADMIN_ROUTES_PREFIX}/user`,
     NOTFOUNDPAGE: "*",
   },
 };

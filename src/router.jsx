@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import CRUD from "./pages/admin/Crud/Crud";
 import Cart from "./pages/users/cart/shoppingCart";
 import ProductDetail from "./pages/users/detail";
 import HomePage from "./pages/users/homePage";
@@ -16,6 +17,7 @@ const RenderUserRouter = () => {
     { path: ROUTERS.USER.LIST_PRODUCT, component: <ListProduct /> },
     { path: ROUTERS.USER.CART, component: <Cart /> },
     { path: ROUTERS.USER.HOME, component: <HomePage /> },
+    { path: ROUTERS.ADMIN.CRUD, component: <CRUD /> },
     { path: ROUTERS.USER.NOTFOUNDPAGE, component: <NotFoundPage /> },
   ];
 

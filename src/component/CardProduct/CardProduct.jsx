@@ -15,6 +15,8 @@ const CardProduct = ({ item }) => {
     setIsHovered(false);
   };
 
+  const priceDiscout = (item.price * (100 - item.discount)) / 100;
+
   return (
     <Link to={`/product/${item.id}`} className="product__link">
       <Card
@@ -30,7 +32,30 @@ const CardProduct = ({ item }) => {
           />
         }
       >
-        <Meta title={item.nameFood} description="This is the description" />
+        <Meta
+          title={item.nameFood}
+          description={
+            item.price ? (
+              <div className="price p-3">
+                <h4 className="txt-price">
+                  {priceDiscout.toLocaleString("vi", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
+                  / {item.packingWay}
+                </h4>
+                {item.discount ? (
+                  <h5 className="txt-discount">
+                    {item.price.toLocaleString("vi", {
+                      style: "currency",
+                      currency: "VND",
+                    })}
+                  </h5>
+                ) : null}
+              </div>
+            ) : null
+          }
+        />
       </Card>
     </Link>
   );

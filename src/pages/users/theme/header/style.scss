@@ -67,26 +67,30 @@
 }
 
 .icon__login,
-.icon__cart {
+.icon__cart,
+.icon__manager {
     align-items: center;
     background-color: transparent;
     border: none;
 }
 
 .icon__login:active,
-.icon__cart:active {
+.icon__cart:active,
+.icon__manager:active {
     background-color: transparent;
     outline: none;
 }
 
 .icon__login:focus,
-.icon__cart:focus {
+.icon__cart:focus,
+.icon__manager:focus {
     background-color: transparent;
     outline: none;
 }
 
 .icon__login:hover,
-.icon__cart:hover {
+.icon__cart:hover,
+.icon__manager:hover {
     background-color: transparent;
     outline: none;
 }

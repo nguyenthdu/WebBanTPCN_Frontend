@@ -16,6 +16,7 @@ function InformationProduct({ productData }) {
               style: "currency",
               currency: "VND",
             })}
+            / {productData.packingWay}
           </h2>
         </div>
       ) : null}

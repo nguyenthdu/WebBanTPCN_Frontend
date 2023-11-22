@@ -12,7 +12,10 @@ export const ROUTERS = {
     NOTFOUNDPAGE: "*",
   },
   ADMIN: {
-    CRUD: `${ADMIN_ROUTES_PREFIX}/crud`,
+    PRODUCT: `${ADMIN_ROUTES_PREFIX}/product`,
+    MANUFACTURER: `${ADMIN_ROUTES_PREFIX}/manufacturer`,
+    BRAND: `${ADMIN_ROUTES_PREFIX}/brand`,
+    CATEGORY: `${ADMIN_ROUTES_PREFIX}/category`,
     USER: `${ADMIN_ROUTES_PREFIX}/user`,
     NOTFOUNDPAGE: "*",
   },

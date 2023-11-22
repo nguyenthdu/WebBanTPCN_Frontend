@@ -20,6 +20,12 @@
     margin-left: 200px;
 }
 
+.custom-toggleSidebar {
+    font-size: 3em;
+    color: #fff;
+    cursor: pointer;
+}
+
 .sidebar ul {
     list-style: none;
     padding: 0;
@@ -28,13 +34,14 @@
 .sidebar a {
     text-decoration: none;
     color: #fff;
-    font-size: 16px;
+    font-size: 1.2em;
     padding: 10px 0;
     display: block;
     transition: color 0.3s ease-in-out;
 }
 
-.sidebar a:hover {
+.sidebar a:hover,
+.custom-toggleSidebar:hover {
     color: #ffcc00;
 }
 

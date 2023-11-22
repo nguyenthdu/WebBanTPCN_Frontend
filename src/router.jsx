@@ -1,5 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import CRUD from "./pages/admin/Crud/Crud";
+import Brand from "./pages/admin/Brand/Brand";
+import Category from "./pages/admin/Category/Category";
+import Manufacturer from "./pages/admin/Manufacturer/Manufacturer";
+import Product from "./pages/admin/Product/Product";
+import CrudUser from "./pages/admin/User/CrudUser";
 import Cart from "./pages/users/cart/shoppingCart";
 import ProductDetail from "./pages/users/detail";
 import HomePage from "./pages/users/homePage";
@@ -17,7 +21,11 @@ const RenderUserRouter = () => {
     { path: ROUTERS.USER.LIST_PRODUCT, component: <ListProduct /> },
     { path: ROUTERS.USER.CART, component: <Cart /> },
     { path: ROUTERS.USER.HOME, component: <HomePage /> },
-    { path: ROUTERS.ADMIN.CRUD, component: <CRUD /> },
+    { path: ROUTERS.ADMIN.PRODUCT, component: <Product /> },
+    { path: ROUTERS.ADMIN.MANUFACTURER, component: <Manufacturer /> },
+    { path: ROUTERS.ADMIN.BRAND, component: <Brand /> },
+    { path: ROUTERS.ADMIN.CATEGORY, component: <Category /> },
+    { path: ROUTERS.ADMIN.USER, component: <CrudUser /> },
     { path: ROUTERS.USER.NOTFOUNDPAGE, component: <NotFoundPage /> },
   ];
 

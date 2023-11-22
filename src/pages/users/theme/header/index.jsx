@@ -50,7 +50,7 @@ function Header() {
   };
 
   const handleAdmin = () => {
-    navigate("/admin/crud");
+    navigate("/admin/product");
   };
 
   const handleCart = () => {

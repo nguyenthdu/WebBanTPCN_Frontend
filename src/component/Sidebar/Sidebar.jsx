@@ -12,16 +12,10 @@ const Sidebar = () => {
             <a href="/admin/product">Sản phẩm</a>
           </li>
           <li>
-            <a href="/admin/manufacturer">Nhà sản xuất</a>
-          </li>
-          <li>
-            <a href="/admin/brand">Thương hiệu</a>
-          </li>
-          <li>
-            <a href="/admin/category">Loại sản phẩm</a>
-          </li>
-          <li>
             <a href="/admin/user">Người dùng</a>
+          </li>
+          <li>
+            <a href="/admin/user">Thống kê</a>
           </li>
         </ul>
       </nav>

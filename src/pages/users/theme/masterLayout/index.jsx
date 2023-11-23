@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Sidebar from "../../../../component/Sidebar/Sidebar";
 import { SidebarProvider } from "../../../../context/SidebarContext/SidebarContext";
 import AuthService from "../../../../services/auth.service";
+import { ADMIN_ROUTES_PREFIX } from "../../../../utils/router";
 import Footer from "../footer";
 import Header from "../header";
 
@@ -29,14 +30,13 @@ const MasterLayout = ({ children, ...props }) => {
     handleRoleChange();
     // console.log("role in render user router: ", role);
   }, []);
-
   // Kiểm tra xem route hiện tại có thuộc về nhóm quản trị không
-  // const shouldDisplaySidebar =
-  //   location.pathname.startsWith(ADMIN_ROUTES_PREFIX);
+  const shouldDisplaySidebar =
+    location.pathname.startsWith(ADMIN_ROUTES_PREFIX);
   return (
     <div {...props}>
       <Header />
-      {role === "ADMIN" ? (
+      {shouldDisplaySidebar && role === "ADMIN" ? (
         <SidebarProvider>
           <div className="d-flex flex-row">
             <Sidebar />

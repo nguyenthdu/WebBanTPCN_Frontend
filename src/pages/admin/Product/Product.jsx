@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { BsFillTrashFill } from "react-icons/bs";
 import { connect } from "react-redux";
 import NavbarProduct from "../../../component/NavBarProduct/NavbarProduct";
 import {
+  fetchItems,
   handleCheckbox,
   handleSelectAll,
 } from "../../../redux/actions/ProductActions";
@@ -15,7 +16,12 @@ const Product = ({
   items,
   handleCheckbox,
   handleSelectAll,
+  fetchItems,
 }) => {
+  useEffect(() => {
+    fetchItems();
+  }, [fetchItems]);
+
   const renderItemHeader = (element) => {
     return element.map((item) => (
       <th className="custom-header" key={item.id}>
@@ -50,9 +56,15 @@ const Product = ({
         </td>
         <td>{item.id}</td>
         <td>{item.code}</td>
-        <td>{item.name}</td>
+        <td>{item.nameFood}</td>
         <td>{item.quantity}</td>
-        <td>{item.price}</td>
+        <td>
+          {item.price.toLocaleString("vi", {
+            style: "currency",
+            currency: "VND",
+          })}
+          / {item.packingWay}
+        </td>
         <td>
           <BsFillTrashFill className="custom-icon-trash" />
         </td>
@@ -66,7 +78,7 @@ const Product = ({
         <NavbarProduct />
         <div className="main-content">
           <h1>Danh sách sản phẩm</h1>
-          <h5 className="custom-quantity">có {items.length} sản phẩm</h5>
+          <h5 className="custom-quantity">{`Có ${items.length} sản phẩm`}</h5>
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -93,6 +105,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   handleCheckbox,
   handleSelectAll,
+  fetchItems,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

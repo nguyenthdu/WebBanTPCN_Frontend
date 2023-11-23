@@ -9,40 +9,8 @@ const initialState = {
     { id: 5, title: "Giá" },
   ],
   selectAll: false,
-  items: [
-    {
-      id: 1,
-      code: "SP01",
-      name: "Áo thun nam",
-      quantity: 10,
-      price: 100000,
-      selected: false,
-    },
-    {
-      id: 2,
-      code: "SP02",
-      name: "Áo thun nữ",
-      quantity: 20,
-      price: 200000,
-      selected: false,
-    },
-    {
-      id: 3,
-      code: "SP03",
-      name: "Áo thun trẻ em",
-      quantity: 30,
-      price: 300000,
-      selected: false,
-    },
-    {
-      id: 4,
-      code: "SP04",
-      name: "Áo thun nam",
-      quantity: 40,
-      price: 400000,
-      selected: false,
-    },
-  ],
+  items: [],
+  error: null,
 };
 
 const productReducer = (state = initialState, action) => {
@@ -73,6 +41,12 @@ const productReducer = (state = initialState, action) => {
         return { ...state, items: updatedItems, selectAll: !state.selectAll };
       };
       return handleSelectAll();
+
+    case "FETCH_ITEMS_SUCCESS":
+      return { ...state, items: action.payload, error: null };
+
+    case "FETCH_ITEMS_ERROR":
+      return { ...state, error: action.payload };
 
     default:
       return state;

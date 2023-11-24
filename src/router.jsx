@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import ProductForm from "./component/productForm/ProductForm";
 import Brand from "./pages/admin/Brand/Brand";
 import Category from "./pages/admin/Category/Category";
 import Manufacturer from "./pages/admin/Manufacturer/Manufacturer";
@@ -31,6 +32,7 @@ const RenderUserRouter = () => {
   const adminRouters = [
     ...userRouters,
     { path: ROUTERS.ADMIN.PRODUCT, component: <Product /> },
+    { path: ROUTERS.ADMIN.ADDPRODUCT, component: <ProductForm /> },
     { path: ROUTERS.ADMIN.MANUFACTURER, component: <Manufacturer /> },
     { path: ROUTERS.ADMIN.BRAND, component: <Brand /> },
     { path: ROUTERS.ADMIN.CATEGORY, component: <Category /> },

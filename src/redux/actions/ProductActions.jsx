@@ -20,3 +20,58 @@ export const fetchItems = () => {
     }
   };
 };
+
+export const addItems = (item) => {
+  return async (dispatch) => {
+    try {
+      await foodFunctionService.addFoodFunction(item);
+      dispatch({ type: "ADD_ITEMS_SUCCESS", payload: item });
+    } catch (error) {
+      dispatch({ type: "ADD_ITEMS_ERROR", payload: error.message });
+    }
+  };
+};
+
+export const updateItems = (item) => {
+  return async (dispatch) => {
+    try {
+      await foodFunctionService.updateFoodFunction(item);
+      dispatch({ type: "UPDATE_ITEMS_SUCCESS", payload: item });
+    } catch (error) {
+      dispatch({ type: "UPDATE_ITEMS_ERROR", payload: error.message });
+    }
+  };
+};
+
+export const deleteItems = (id) => {
+  return async (dispatch) => {
+    try {
+      await foodFunctionService.deleteFood(id);
+      dispatch({ type: "DELETE_ITEMS_SUCCESS", payload: id });
+    } catch (error) {
+      dispatch({ type: "DELETE_ITEMS_ERROR", payload: error.message });
+    }
+  };
+};
+
+export const getItemsById = (id) => {
+  return async (dispatch) => {
+    try {
+      const data = await foodFunctionService.getFood(id);
+      dispatch({ type: "GET_ITEMS_SUCCESS", payload: data });
+    } catch (error) {
+      dispatch({ type: "GET_ITEMS_ERROR", payload: error.message });
+    }
+  };
+};
+
+export const getItemsByName = (name) => {
+  return async (dispatch) => {
+    try {
+      const data = await foodFunctionService.getFoodByName(name);
+      dispatch({ type: "GET_ITEMS_BY_NAME_SUCCESS", payload: data });
+    } catch (error) {
+      dispatch({ type: "GET_ITEMS_BY_NAME_ERROR", payload: error.message });
+    }
+  };
+};

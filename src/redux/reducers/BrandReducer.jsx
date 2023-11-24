@@ -3,21 +3,20 @@ const initialState = {
   header: [
     { id: 0, title: "Chọn toàn bộ" },
     { id: 1, title: "ID" },
-    { id: 2, title: "Code" },
-    { id: 3, title: "Tên sản phẩm" },
-    { id: 4, title: "Tồn kho" },
-    { id: 5, title: "Giá" },
+    { id: 2, title: "Tên thương hiệu" },
+    { id: 3, title: "Mô tả" },
+    { id: 4, title: "Xuất xứ" },
   ],
   selectAll: false,
-  items: [],
+  itemsBrand: [],
   error: null,
 };
 
-const productReducer = (state = initialState, action) => {
+const BrandReducer = (state = initialState, action) => {
   switch (action.type) {
     case "HANDLE_CHECKBOX":
       const handleCheckbox = (id) => {
-        const updatedItems = state.items.map((element) => {
+        const updatedItems = state.itemsBrand.map((element) => {
           if (id === 0) {
             if (element.id === 0) return { ...element, selected: true };
             return { ...element, selected: false };
@@ -28,57 +27,65 @@ const productReducer = (state = initialState, action) => {
             return element.id === 0 ? { ...element, selected: false } : element;
           }
         });
-        return { ...state, items: updatedItems };
+        return { ...state, itemsBrand: updatedItems };
       };
       return handleCheckbox(action.payload);
 
     case "HANDLE_SELECT_ALL":
       const handleSelectAll = () => {
-        const updatedItems = state.items.map((element) => ({
+        const updatedItems = state.itemsBrand.map((element) => ({
           ...element,
           selected: !state.selectAll,
         }));
-        return { ...state, items: updatedItems, selectAll: !state.selectAll };
+        return {
+          ...state,
+          itemsBrand: updatedItems,
+          selectAll: !state.selectAll,
+        };
       };
       return handleSelectAll();
 
-    case "FETCH_ITEMS_SUCCESS":
-      return { ...state, items: action.payload, error: null };
+    case "GET_ALL_BRAND_SUCCESS":
+      return { ...state, itemsBrand: action.payload, error: null };
 
-    case "FETCH_ITEMS_ERROR":
+    case "GET_ALL_BRAND_ERROR":
       return { ...state, error: action.payload };
 
-    case "ADD_ITEMS_SUCCESS":
-      return { ...state, items: [...state.items, action.payload], error: null };
+    case "ADD_BRAND_SUCCESS":
+      return {
+        ...state,
+        itemsBrand: [...state.itemsBrand, action.payload],
+        error: null,
+      };
 
-    case "ADD_ITEMS_ERROR":
+    case "ADD_BRAND_ERROR":
       return { ...state, error: action.payload };
 
-    case "UPDATE_ITEMS_SUCCESS":
-      const updatedItems = state.items.map((element) => {
+    case "UPDATE_BRAND_SUCCESS":
+      const updatedItems = state.itemsBrand.map((element) => {
         if (element.id === action.payload.id) {
           return action.payload;
         }
         return element;
       });
-      return { ...state, items: updatedItems, error: null };
+      return { ...state, itemsBrand: updatedItems, error: null };
 
-    case "UPDATE_ITEMS_ERROR":
+    case "UPDATE_BRAND_ERROR":
       return { ...state, error: action.payload };
 
-    case "DELETE_ITEMS_SUCCESS":
-      const deletedItems = state.items.filter(
+    case "DELETE_BRAND_SUCCESS":
+      const deletedItems = state.itemsBrand.filter(
         (element) => element.id !== action.payload
       );
-      return { ...state, items: deletedItems, error: null };
+      return { ...state, itemsBrand: deletedItems, error: null };
 
-    case "DELETE_ITEMS_ERROR":
+    case "DELETE_BRAND_ERROR":
       return { ...state, error: action.payload };
 
-    case "GET_ITEMS_SUCCESS":
-      return { ...state, items: action.payload, error: null };
+    case "GET_BRAND_SUCCESS":
+      return { ...state, itemsBrand: action.payload, error: null };
 
-    case "GET_ITEMS_ERROR":
+    case "GET_BRAND_ERROR":
       return { ...state, error: action.payload };
 
     default:
@@ -86,4 +93,4 @@ const productReducer = (state = initialState, action) => {
   }
 };
 
-export default productReducer;
+export default BrandReducer;

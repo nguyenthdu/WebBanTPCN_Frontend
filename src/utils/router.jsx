@@ -16,6 +16,7 @@ export const ROUTERS = {
   },
   ADMIN: {
     PRODUCT: `${ADMIN_ROUTES_PREFIX}/product`,
+    ADDPRODUCT: `${ADMIN_ROUTES_PREFIX}/product/add`,
     MANUFACTURER: `${ADMIN_ROUTES_PREFIX}/manufacturer`,
     BRAND: `${ADMIN_ROUTES_PREFIX}/brand`,
     CATEGORY: `${ADMIN_ROUTES_PREFIX}/category`,

@@ -4,7 +4,7 @@
 
 const API_URL = "http://localhost:8080/api/v1/";
 
-const API_URL_SLIDER = "https://65457cf3fe036a2fa95459a0.mockapi.io/api/v1/";
+// const API_URL_SLIDER = "https://65457cf3fe036a2fa95459a0.mockapi.io/api/v1/";
 
 const API_URL_CART = "https://654ef714358230d8f0ccec5b.mockapi.io/api/v1/";
 
@@ -51,31 +51,31 @@ export const apiUtils = {
 // -------------------------------------------------------------------------
 
 // Common API utility using Fetch
-export const apiUtilsSLIDER = {
-  request: async (endpoint, method = "GET", data, customConfig = {}) => {
-    const options = {
-      ...requestOptions,
-      method,
-      headers: {
-        "Content-Type": "application/json",
-        ...customConfig.headers, // tùy chỉnh
-      },
-      ...customConfig,
-    };
+// export const apiUtilsSLIDER = {
+//   request: async (endpoint, method = "GET", data, customConfig = {}) => {
+//     const options = {
+//       ...requestOptions,
+//       method,
+//       headers: {
+//         "Content-Type": "application/json",
+//         ...customConfig.headers, // tùy chỉnh
+//       },
+//       ...customConfig,
+//     };
 
-    if (data) {
-      options.body = JSON.stringify(data);
-    }
+//     if (data) {
+//       options.body = JSON.stringify(data);
+//     }
 
-    try {
-      const response = await fetch(`${API_URL_SLIDER}${endpoint}`, options);
-      return handleResponse(response);
-    } catch (error) {
-      console.error(error);
-      throw new Error("Error making API request");
-    }
-  },
-};
+//     try {
+//       const response = await fetch(`${API_URL_SLIDER}${endpoint}`, options);
+//       return handleResponse(response);
+//     } catch (error) {
+//       console.error(error);
+//       throw new Error("Error making API request");
+//     }
+//   },
+// };
 
 // Common API utility using Fetch (cart) vì url api khác nhau nên mới cần tới nó
 export const apiUtilsCart = {

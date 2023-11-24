@@ -15,7 +15,7 @@ const Sidebar = () => {
             <a href="/admin/user">Người dùng</a>
           </li>
           <li>
-            <a href="/admin/user">Thống kê</a>
+            <a href="/admin/statistical">Thống kê</a>
           </li>
         </ul>
       </nav>

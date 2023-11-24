@@ -9,6 +9,11 @@ const foodFunctionService = {
     // Specific logic for searching by name, using apiUtils.request for generic API calls
     return apiUtils.request(`foodFunction?name=${name}`, "GET");
   },
+  addFoodFunction: (foodFunction) =>
+    apiUtils.request("foodFunctions", "POST", foodFunction),
+  updateFoodFunction: (foodFunction) =>
+    apiUtils.request(`foodFunctions`, "PUT", foodFunction),
+  deleteFoodFunction: (id) => apiUtils.request(`foodFunctions/${id}`, "DELETE"),
 };
 
 export default foodFunctionService;

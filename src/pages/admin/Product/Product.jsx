@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
-import { Table } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Table } from "react-bootstrap";
 import { BsFillTrashFill } from "react-icons/bs";
 import { connect } from "react-redux";
 import NavbarProduct from "../../../component/NavBarProduct/NavbarProduct";
+import ProductForm from "../../../component/productForm/ProductForm";
 import {
   fetchItems,
   handleCheckbox,
@@ -72,24 +73,47 @@ const Product = ({
     ));
   };
 
+  const [isShow, setIsShow] = useState(false);
+
+  const handleShow = () => {
+    setIsShow(!isShow);
+  };
   return (
     <div className="d-flex flex-row">
       <div className="content">
         <NavbarProduct />
         <div className="main-content">
-          <h1>Danh sách sản phẩm</h1>
-          <h5 className="custom-quantity">{`Có ${items.length} sản phẩm`}</h5>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                {renderItemHeader(header)}
-                <td>
-                  <BsFillTrashFill className="custom-icon-trash" />
-                </td>
-              </tr>
-            </thead>
-            <tbody>{renderItem(items)}</tbody>
-          </Table>
+          <div className="d-flex flex-row">
+            <h1>Danh sách sản phẩm</h1>
+            <Button
+              variant="primary btn custom-btn ms-5"
+              onClick={handleShow}
+              style={{
+                fontSize: "1.2em",
+                backgroundColor: isShow ? "#dc3545" : "green",
+              }}
+            >
+              {isShow ? "Đóng" : "Thêm sản phẩm"}
+            </Button>
+          </div>
+          {isShow ? (
+            <ProductForm />
+          ) : (
+            <>
+              <h5 className="custom-quantity">{`Có ${items.length} sản phẩm`}</h5>
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    {renderItemHeader(header)}
+                    <td>
+                      <BsFillTrashFill className="custom-icon-trash" />
+                    </td>
+                  </tr>
+                </thead>
+                <tbody>{renderItem(items)}</tbody>
+              </Table>
+            </>
+          )}
         </div>
       </div>
     </div>

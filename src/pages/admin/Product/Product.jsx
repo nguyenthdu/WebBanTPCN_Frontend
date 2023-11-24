@@ -55,8 +55,14 @@ const Product = ({
             />
           </label>
         </td>
-        <td>{item.id}</td>
-        <td>{item.code}</td>
+        <td>
+          <img
+            alt={item.nameFood}
+            className="ctm-img"
+            src={item.imageBase64[0]}
+            style={{ maxHeight: "auto", maxWidth: "50%" }}
+          />
+        </td>
         <td>{item.nameFood}</td>
         <td>{item.quantity}</td>
         <td>

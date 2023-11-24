@@ -58,20 +58,16 @@ const CrudUser = ({
             />
           </label>
         </td>
-        {[
-          "id",
-          "firstName",
-          "lastName",
-          "phone",
-          "email",
-          "username",
-          "password",
-          "role",
-          "enabled",
-        ].map((field) => (
-          <td key={field}>{item[field]}</td>
-        ))}
-        <td></td>
+        {["firstName", "lastName", "phone", "email", "username", "role"].map(
+          (field) => (
+            <td key={field}>{item[field]}</td>
+          )
+        )}
+        <td>
+          <Button variant="link" onClick={handleDelete} style={{ padding: 0 }}>
+            <BsFillTrashFill className="custom-icon-trash" />
+          </Button>
+        </td>
       </tr>
     ));
   };
@@ -95,26 +91,25 @@ const CrudUser = ({
         <NavbarUser />
         <div className="main-content">
           <h1>Danh sách người dùng</h1>
+          <h5 className="custom-quantity">{`Có ${itemsUser.length} người dùng`}</h5>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                {renderItemHeader(header)}
+                <td>
+                  <Button
+                    variant="link"
+                    onClick={handleDelete}
+                    style={{ padding: 0 }}
+                  >
+                    <BsFillTrashFill className="custom-icon-trash" />
+                  </Button>
+                </td>
+              </tr>
+            </thead>
+            <tbody>{renderItem(itemsUser)}</tbody>
+          </Table>
         </div>
-
-        <h5 className="custom-quantity">{`Có ${itemsUser.length} người dùng`}</h5>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              {renderItemHeader(header)}
-              <td>
-                <Button
-                  variant="link"
-                  onClick={handleDelete}
-                  style={{ padding: 0 }}
-                >
-                  <BsFillTrashFill className="custom-icon-trash" />
-                </Button>
-              </td>
-            </tr>
-          </thead>
-          <tbody>{renderItem(itemsUser)}</tbody>
-        </Table>
       </div>
     </div>
   );

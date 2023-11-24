@@ -1,3 +1,4 @@
+import getImageBase64 from "../../component/getImageBase64/GetImageBase64";
 import foodFunctionService from "../../services/foodFunction.service";
 
 // create actions of products
@@ -9,6 +10,13 @@ export const handleCheckbox = (id) => ({
   type: "HANDLE_CHECKBOX",
   payload: id,
 });
+
+export const convertImagesToBase64 = (products) => {
+  return products.map((product) => {
+    const imageBase64 = getImageBase64(product.imageFiles);
+    return { ...product, imageBase64 };
+  });
+};
 
 export const fetchItems = () => {
   return async (dispatch) => {

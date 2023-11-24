@@ -102,12 +102,16 @@ const Brand = ({
             />
           </label>
         </td>
-        {["id", "nameBrand", "description", "origin"].map((field) => (
+        {["nameBrand", "description", "origin"].map((field) => (
           <td key={field} onClick={() => hanldleShowUpdate(item.id)}>
             {item[field]}
           </td>
         ))}
-        <td></td>
+        <td>
+          <Button variant="link" onClick={handleDelete} style={{ padding: 0 }}>
+            <BsFillTrashFill className="custom-icon-trash" />
+          </Button>
+        </td>
       </tr>
     ));
   };

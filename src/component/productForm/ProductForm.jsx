@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import { BsXLg } from "react-icons/bs";
 import { connect } from "react-redux";
 import { getAllBrands } from "../../redux/actions/BrandActions";
 import { getAllCategory } from "../../redux/actions/CategoryActions";
@@ -40,7 +41,24 @@ const ProductForm = ({
   const handleImagesChange = (e) => {
     // Xử lý khi người dùng chọn hình ảnh
     const files = Array.from(e.target.files);
-    setFormData({ ...formData, images: files });
+    // setFormData({ ...formData, images: files });
+    // Thêm các ảnh mới vào danh sách hiện tại
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      images: [...(prevFormData.images || []), ...files],
+    }));
+  };
+
+  // hàm xóa ảnh
+  const handleRemoveImage = (index) => {
+    setFormData((prevFormData) => {
+      const newImages = [...prevFormData.images];
+      newImages.splice(index, 1);
+      return {
+        ...prevFormData,
+        images: newImages,
+      };
+    });
   };
 
   useEffect(() => {
@@ -322,12 +340,56 @@ const ProductForm = ({
         <Col>
           <Form.Group controlId="formProductImage">
             <Form.Label className="custom-label">Ảnh sản phẩm</Form.Label>
-            <Form.Control
-              type="file"
-              accept="image/*"
-              onChange={handleImagesChange}
-              multiple
-            />
+            {formData.images && formData.images.length > 0 ? (
+              <>
+                <Form.Label className="custom-label">Ảnh sản phẩm</Form.Label>
+                <Form.Control
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImagesChange}
+                  multiple
+                />
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    marginTop: "10px",
+                  }}
+                >
+                  <h5 className="custom-label" style={{ marginRight: "10px" }}>
+                    Ảnh đã chọn:
+                  </h5>
+                  {formData.images.map((image, index) => (
+                    <div key={index} style={{ marginRight: "10px" }}>
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={() => handleRemoveImage(index)}
+                      >
+                        <BsXLg />
+                      </Button>
+                      <img
+                        src={URL.createObjectURL(image)}
+                        alt={`Selected Image ${index}`}
+                        style={{
+                          width: "100px",
+                          height: "auto",
+                          marginRight: "5px",
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <Form.Control
+                key={formData.images ? "withImages" : "withoutImages"}
+                type="file"
+                accept="image/*"
+                onChange={handleImagesChange}
+                multiple
+              />
+            )}
           </Form.Group>
         </Col>
       </Row>

@@ -60,16 +60,6 @@ const ManufacturerForm = ({
 
   return (
     <Form onSubmit={handleSubmit}>
-      {formType === "add" ? null : (
-        <Row className="custom-row">
-          <Col>
-            <Form.Group controlId="formManufacturerId">
-              <Form.Label className="custom-label">Mã nhà sản xuất</Form.Label>
-              <div className="custom-large-text">{formData.id}</div>
-            </Form.Group>
-          </Col>
-        </Row>
-      )}
       <Row className="custom-row">
         <Col>
           <Form.Group controlId="formManufacturerName">

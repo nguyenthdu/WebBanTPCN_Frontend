@@ -59,16 +59,6 @@ const BrandForm = ({
 
   return (
     <Form onSubmit={handleSubmit}>
-      {formType === "add" ? null : (
-        <Row className="custom-row">
-          <Col>
-            <Form.Group controlId="formBrandId">
-              <Form.Label className="custom-label">Mã thương hiệu</Form.Label>
-              <div className="custom-large-text">{formData.id}</div>
-            </Form.Group>
-          </Col>
-        </Row>
-      )}
       <Row className="custom-row">
         <Col>
           <Form.Group controlId="formBrandName">

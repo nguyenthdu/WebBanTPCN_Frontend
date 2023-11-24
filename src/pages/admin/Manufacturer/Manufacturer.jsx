@@ -75,7 +75,6 @@ const Manufacturer = ({
           </label>
         </td>
         {[
-          "id",
           "nameManufacturer",
           "address",
           "phoneNumber",
@@ -92,7 +91,11 @@ const Manufacturer = ({
         <td onClick={() => hanldleShowUpdate()}>{item.phoneNumber}</td>
         <td onClick={() => hanldleShowUpdate()}>{item.email}</td>
         <td onClick={() => hanldleShowUpdate()}>{item.description}</td> */}
-        <td></td>
+        <td>
+          <Button variant="link" onClick={handleDelete} style={{ padding: 0 }}>
+            <BsFillTrashFill className="custom-icon-trash" />
+          </Button>
+        </td>
       </tr>
     ));
   };
@@ -134,9 +137,9 @@ const Manufacturer = ({
             <h1>
               {isShow || isShowUpdate
                 ? isNewForm
-                  ? "Thêm loại sản phẩm"
-                  : "Cập nhật loại sản phẩm"
-                : "Danh sách loại sản phẩm"}
+                  ? "Thêm nhà sản xuất"
+                  : "Cập nhật nhà sản xuất"
+                : "Danh sách nhà sản xuất"}
             </h1>
             <Button
               variant="primary btn custom-btn ms-5"

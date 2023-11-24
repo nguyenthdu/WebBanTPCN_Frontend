@@ -55,7 +55,6 @@ const Category = ({
             />
           </label>
         </td>
-        <td>{item.id}</td>
         <td>{item.name}</td>
         <td>
           <BsFillTrashFill className="custom-icon-trash" />

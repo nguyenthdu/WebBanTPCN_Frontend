@@ -27,7 +27,7 @@ const CardProduct = ({ item }) => {
             alt={item.nameFood}
             className="custom-image"
             src={isHovered ? item.imageBase64[1] : item.imageBase64[0]}
-            onMouseOver={handleMouseOver}
+            // onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
           />
         }

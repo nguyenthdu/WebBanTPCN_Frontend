@@ -1,8 +1,7 @@
 const initialState = {
   header: [
     { id: 0, title: "Chọn toàn bộ" },
-    { id: 1, title: "ID" },
-    { id: 2, title: "Tên loại sản phẩm" },
+    { id: 1, title: "Tên loại sản phẩm" },
   ],
   selectAll: false,
   itemsCategory: [],

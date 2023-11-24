@@ -2,10 +2,9 @@
 const initialState = {
   header: [
     { id: 0, title: "Chọn toàn bộ" },
-    { id: 1, title: "ID" },
-    { id: 2, title: "Tên thương hiệu" },
-    { id: 3, title: "Mô tả" },
-    { id: 4, title: "Xuất xứ" },
+    { id: 1, title: "Tên thương hiệu" },
+    { id: 2, title: "Mô tả" },
+    { id: 3, title: "Xuất xứ" },
   ],
   selectAll: false,
   itemsBrand: [],

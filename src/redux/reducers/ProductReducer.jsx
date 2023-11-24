@@ -1,12 +1,13 @@
+import { convertImagesToBase64 } from "../actions/ProductActions";
+
 // create reducer switch case and initial state
 const initialState = {
   header: [
     { id: 0, title: "Chọn toàn bộ" },
-    { id: 1, title: "ID" },
-    { id: 2, title: "Code" },
-    { id: 3, title: "Tên sản phẩm" },
-    { id: 4, title: "Tồn kho" },
-    { id: 5, title: "Giá" },
+    { id: 1, title: "Hình ảnh minh họa" },
+    { id: 2, title: "Tên sản phẩm" },
+    { id: 3, title: "Tồn kho" },
+    { id: 4, title: "Giá" },
   ],
   selectAll: false,
   items: [],
@@ -43,7 +44,11 @@ const productReducer = (state = initialState, action) => {
       return handleSelectAll();
 
     case "FETCH_ITEMS_SUCCESS":
-      return { ...state, items: action.payload, error: null };
+      return {
+        ...state,
+        items: convertImagesToBase64(action.payload),
+        error: null,
+      };
 
     case "FETCH_ITEMS_ERROR":
       return { ...state, error: action.payload };

@@ -19,8 +19,8 @@ const ListProduct = ({ list }) => {
         gutter: 16,
         sm: 1,
         md: 2,
-        xl: 4,
-        // xxl: 6,
+        // xl: 4,
+        xl: 6,
       }}
       dataSource={products}
       renderItem={(item) => renderItem(item)}

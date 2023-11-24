@@ -37,20 +37,21 @@ const CardProduct = ({ item }) => {
           description={
             item.price ? (
               <div className="price p-3">
-                <h4 className="txt-price">
+                <span className="txt-price">
                   {priceDiscout.toLocaleString("vi", {
                     style: "currency",
                     currency: "VND",
-                  })}
+                  })}{" "}
                   / {item.packingWay}
-                </h4>
+                </span>
+                <br />
                 {item.discount ? (
-                  <h5 className="txt-discount">
+                  <span className="txt-discount">
                     {item.price.toLocaleString("vi", {
                       style: "currency",
                       currency: "VND",
                     })}
-                  </h5>
+                  </span>
                 ) : null}
               </div>
             ) : null

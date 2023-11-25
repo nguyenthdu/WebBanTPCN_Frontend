@@ -107,6 +107,11 @@ const Product = ({
   const handleShow = () => {
     setIsShow(!isShow);
     setIsShowUpdate(false);
+    // reload lại trang
+    if (isShow || isShowUpdate) {
+      window.location.reload();
+      navigate("/admin/product");
+    }
   };
 
   const [isShowUpdate, setIsShowUpdate] = useState(false);

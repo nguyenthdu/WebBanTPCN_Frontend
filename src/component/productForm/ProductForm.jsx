@@ -38,7 +38,7 @@ const ProductForm = ({
   const manufacturers = itemsManufacturer;
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
     var formdata = new FormData();
     formdata.append("nameFood", formData.nameFood || "thanh12ss2asd223");
@@ -73,7 +73,6 @@ const ProductForm = ({
       .then((response) => response.text())
       .then((result) => {
         console.log(result);
-        navigate("/admin/product");
       })
       .catch((error) => console.log("error", error));
   };

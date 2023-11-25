@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { getAllBrands } from "../../redux/actions/BrandActions";
 import { getAllCategory } from "../../redux/actions/CategoryActions";
 import { getAllManufacturer } from "../../redux/actions/ManufactureActions";
-import { addItems } from "../../redux/actions/ProductActions";
+import { addItems, getItemsById } from "../../redux/actions/ProductActions";
 import "./ProductFormStyles.scss";
 
 const ProductForm = ({
@@ -17,11 +17,11 @@ const ProductForm = ({
   getAllManufacturer,
   itemsManufacturer,
   addItems,
+  items,
+  itemId,
 }) => {
   const fileInputRef = useRef(null);
-  const [formData, setFormData] = useState({
-    images: [], // Danh sách ảnh đã chọn
-  });
+  const [formData, setFormData] = useState({});
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedManufacturer, setSelectedManufacturer] = useState(null);
@@ -36,6 +36,30 @@ const ProductForm = ({
   const brands = itemsBrand;
   const categories = itemsCategory;
   const manufacturers = itemsManufacturer;
+  useEffect(() => {
+    const fetchData = async () => {
+      if (itemId) {
+        try {
+          await getItemsById(itemId);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+    };
+
+    fetchData(); // Call the async function immediately
+  }, [itemId]);
+
+  useEffect(() => {
+    if (itemId) {
+      const item = items;
+      setFormData(item);
+    }
+  }, [itemId, items]);
+
+  useEffect(() => {
+    console.log("formData", formData);
+  }, [formData]);
 
   const handleSubmit = async (e) => {
     // e.preventDefault();
@@ -84,7 +108,7 @@ const ProductForm = ({
     // Thêm các ảnh mới vào danh sách hiện tại
     setFormData((prevFormData) => ({
       ...prevFormData,
-      images: [...prevFormData.images, ...files],
+      images: [...(prevFormData.images || []), ...files],
     }));
   };
 
@@ -384,7 +408,7 @@ const ProductForm = ({
             multiple
             onChange={handleImagesChange}
           />
-          {formData.images.length > 0 && (
+          {formData.images && formData.imageBase64.length > 0 && (
             <div
               style={{
                 display: "flex",
@@ -439,6 +463,7 @@ const ProductForm = ({
 };
 
 const mapStateToProps = (state) => ({
+  items: state.product.items || [],
   itemsBrand: state.brand.itemsBrand || [],
   itemsCategory: state.category.itemsCategory || [],
   itemsManufacturer: state.manufacturer.itemsManufacturer || [],
@@ -449,6 +474,7 @@ const mapDispatchToProps = {
   getAllBrands,
   getAllManufacturer,
   addItems,
+  getItemsById,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductForm);

@@ -1,14 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { getAllBrands } from "../../redux/actions/BrandActions";
 import { getAllCategory } from "../../redux/actions/CategoryActions";
 import { getAllManufacturer } from "../../redux/actions/ManufactureActions";
 import { addItems } from "../../redux/actions/ProductActions";
 import "./ProductFormStyles.scss";
-
 const ProductForm = ({
   getAllBrands,
   itemsBrand,
@@ -18,50 +16,36 @@ const ProductForm = ({
   itemsManufacturer,
   addItems,
 }) => {
-  const fileInputRef = useRef(null);
-  const [formData, setFormData] = useState({
-    images: [], // Danh sách ảnh đã chọn
-  });
+  const [formData, setFormData] = useState({});
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedManufacturer, setSelectedManufacturer] = useState(null);
 
-  const navigate = useNavigate();
-  useEffect(() => {
-    getAllBrands();
-    getAllCategory();
-    getAllManufacturer();
-  }, [getAllBrands, getAllCategory, getAllManufacturer]);
-
-  const brands = itemsBrand;
-  const categories = itemsCategory;
-  const manufacturers = itemsManufacturer;
-
   const handleSubmit = async (e) => {
-    // e.preventDefault();
-
+    e.preventDefault();
+    // Do something with the form data, like sending it to a server
     var formdata = new FormData();
-    formdata.append("nameFood", formData.nameFood || "thanh12ss2asd223");
-    formdata.append("description", formData.description || "sssss");
-    formdata.append("price", formData.price || "100");
-    formdata.append("quantity", formData.quantity || "10");
-    formdata.append("ingredients", formData.ingredients || "aaaaaaaaaaaa");
-    formdata.append("packingWay", formData.packingWay || "cccc");
-    formdata.append("dosageForm", formData.dosageForm || "ccc");
-    formdata.append(
-      "placeOfManufacture",
-      formData.placeOfManufacture || "ccccc"
-    );
-    formdata.append("expiryDate", formData.expiryDate || "222");
-    formdata.append("manufacturerId", formData.manufacturerId || "1");
-    formdata.append("brandId", formData.brandId || "1");
-    formdata.append("categoryId", formData.categoryId || "1");
-    formdata.append("discount", formData.discount || "10");
+    formdata.append("nameFood", "thanh12");
+    formdata.append("description", "sssss");
+    formdata.append("price", "100");
+    formdata.append("quantity", "10");
 
-    // Thêm ảnh vào FormData
-    formData.images.forEach((image) => {
-      formdata.append("imageFiles", image);
+    // Create a dummy image blob (replace this with your actual image blob if needed)
+    var dummyImageBlob = new Blob(["dummy image content"], {
+      type: "image/png",
     });
+
+    // Append the dummy image blob to the FormData
+    formdata.append("imageFiles", dummyImageBlob, "dummy-image.png");
+
+    formdata.append("ingredients", "aaaaaaaaaaaa");
+    formdata.append("packingWay", "cccc");
+    formdata.append("dosageForm", "ccc");
+    formdata.append("placeOfManufacture", "ccccc");
+    formdata.append("expiryDate", "222");
+    formdata.append("manufacturerId", "1");
+    formdata.append("brandId", "1");
+    formdata.append("categoryId", "1");
 
     var requestOptions = {
       method: "POST",
@@ -71,11 +55,18 @@ const ProductForm = ({
 
     fetch("http://localhost:8080/api/v1/foodFunctions", requestOptions)
       .then((response) => response.text())
-      .then((result) => {
-        console.log(result);
-        navigate("/admin/product");
-      })
+      .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
+
+    // try {
+    //   await addItems(formData);
+    //   // Cập nhật state hoặc thực hiện các hành động khác sau khi thêm sản phẩm thành công
+    //   // Ví dụ: Xóa dữ liệu trong form hoặc chuyển hướng đến trang danh sách sản phẩm
+    // } catch (error) {
+    //   // Xử lý lỗi nếu có
+    //   console.error("Error adding items:", error);
+    // }
+    console.log("Form submitted:", formData);
   };
 
   const handleImagesChange = (e) => {
@@ -84,7 +75,7 @@ const ProductForm = ({
     // Thêm các ảnh mới vào danh sách hiện tại
     setFormData((prevFormData) => ({
       ...prevFormData,
-      images: [...prevFormData.images, ...files],
+      images: [...(prevFormData.images || []), ...files],
     }));
   };
 
@@ -100,14 +91,23 @@ const ProductForm = ({
     });
   };
 
+  useEffect(() => {
+    getAllBrands();
+    getAllCategory();
+    getAllManufacturer();
+  }, [getAllBrands, getAllCategory, getAllManufacturer]);
+
+  const brands = itemsBrand;
+  const categories = itemsCategory;
+
+  const manufacturers = itemsManufacturer;
+
   return (
-    <form onSubmit={handleSubmit}>
-      <Row className="custom-row" style={{ marginTop: "10px" }}>
+    <Form onSubmit={handleSubmit}>
+      <Row className="custom-row">
         <Col>
           <Form.Group controlId="formProductName">
-            <Form.Label className="custom-label">
-              <h5 className="custom-label">Tên sản phẩm</h5>
-            </Form.Label>
+            <Form.Label className="custom-label">Tên sản phẩm</Form.Label>
             <Form.Control
               type="text"
               placeholder="Nhập tên sản phẩm"
@@ -121,9 +121,7 @@ const ProductForm = ({
 
         <Col>
           <Form.Group controlId="formProductPrice">
-            <Form.Label className="custom-label">
-              <h5 className="custom-label">Giá sản phẩm (VND)</h5>
-            </Form.Label>
+            <Form.Label className="custom-label">Giá sản phẩm</Form.Label>
             <Form.Control
               type="textarea"
               placeholder="Nhập giá sản phẩm"
@@ -137,9 +135,7 @@ const ProductForm = ({
 
         <Col>
           <Form.Group controlId="formProductPlaceOfManufacture">
-            <Form.Label className="custom-label">
-              <h5 className="custom-label">Xuất xứ</h5>
-            </Form.Label>
+            <Form.Label className="custom-label">Xuất xứ</Form.Label>
             <Form.Control
               type="text"
               placeholder="Nhập xuất xứ"
@@ -155,9 +151,7 @@ const ProductForm = ({
       <Row className="custom-row">
         <Col>
           <Form.Group controlId="formProductDescription">
-            <Form.Label className="custom-label">
-              <h5 className="custom-label">Mô tả</h5>
-            </Form.Label>
+            <Form.Label className="custom-label">Mô tả</Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
@@ -174,9 +168,7 @@ const ProductForm = ({
       <Row className="custom-row">
         <Col>
           <Form.Group controlId="formProductQuantity">
-            <Form.Label className="custom-label">
-              <h5 className="custom-label">Tồn kho</h5>
-            </Form.Label>
+            <Form.Label className="custom-label">Tồn kho</Form.Label>
             <Form.Control
               type="text"
               placeholder="Nhập số lượng tồn kho của sản phẩm"
@@ -190,9 +182,7 @@ const ProductForm = ({
 
         <Col>
           <Form.Group controlId="formProductIngredients">
-            <Form.Label className="custom-label">
-              <h5 className="custom-label">Thành phần</h5>
-            </Form.Label>
+            <Form.Label className="custom-label">Thành phần</Form.Label>
             <Form.Control
               type="text"
               placeholder="Nhập thành phần của sản phẩm"
@@ -206,9 +196,7 @@ const ProductForm = ({
 
         <Col>
           <Form.Group controlId="formProductDiscount">
-            <Form.Label className="custom-label">
-              <h5 className="custom-label">Khuyến mãi (%)</h5>
-            </Form.Label>
+            <Form.Label className="custom-label">Khuyến mãi</Form.Label>
             <Form.Control
               type="text"
               placeholder="Nhập khuyến mãi"
@@ -224,9 +212,7 @@ const ProductForm = ({
       <Row className="custom-row">
         <Col>
           <Form.Group controlId="formProductDosageForm">
-            <Form.Label className="custom-label">
-              <h5 className="custom-label">Dạng bào chế</h5>
-            </Form.Label>
+            <Form.Label className="custom-label">Dạng bào chế</Form.Label>
             <Form.Control
               type="text"
               placeholder="Nhập dạng bào chế"
@@ -240,9 +226,7 @@ const ProductForm = ({
 
         <Col>
           <Form.Group controlId="formProductExpiryDate">
-            <Form.Label className="custom-label">
-              <h5 className="custom-label">Hạn sử dụng (tháng)</h5>
-            </Form.Label>
+            <Form.Label className="custom-label">Hạn sử dụng</Form.Label>
             <Form.Control
               type="text"
               placeholder="Nhập hạn sử dụng (12 tháng: 12...)"
@@ -256,9 +240,7 @@ const ProductForm = ({
 
         <Col>
           <Form.Group controlId="formProductPackingWay">
-            <Form.Label className="custom-label">
-              <h5 className="custom-label">Cách đóng gói</h5>
-            </Form.Label>
+            <Form.Label className="custom-label">Cách đóng gói</Form.Label>
             <Form.Control
               type="text"
               placeholder="Nhập cách đóng gói"
@@ -274,9 +256,7 @@ const ProductForm = ({
       <Row>
         <Col>
           <Form.Group controlId="formProductBrand">
-            <Form.Label className="custom-label">
-              <h5 className="custom-label">Thương hiệu</h5>
-            </Form.Label>
+            <Form.Label className="custom-label">Thương hiệu</Form.Label>
             <Form.Control
               as="select"
               value={selectedBrand}
@@ -306,9 +286,7 @@ const ProductForm = ({
 
         <Col>
           <Form.Group controlId="formProductCategory">
-            <Form.Label className="custom-label">
-              <h5 className="custom-label">Danh mục</h5>
-            </Form.Label>
+            <Form.Label className="custom-label">Danh mục</Form.Label>
             <Form.Control
               as="select"
               value={selectedCategory}
@@ -338,9 +316,7 @@ const ProductForm = ({
 
         <Col>
           <Form.Group controlId="formProductManufacturer">
-            <Form.Label className="custom-label">
-              <h5 className="custom-label">Nhà sản xuất</h5>
-            </Form.Label>
+            <Form.Label className="custom-label">Nhà sản xuất</Form.Label>
             <Form.Control
               as="select"
               value={selectedManufacturer}
@@ -369,56 +345,85 @@ const ProductForm = ({
           </Form.Group>
         </Col>
       </Row>
-      <Row className="custom-row">
-        <Form.Group controlId="formProductImage">
-          <Form.Label
-            className="custom-label"
-            style={{ margin: "10px 10px 0 0" }}
-          >
-            <h5 className="custom-label">Ảnh sản phẩm</h5>
-          </Form.Label>
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            multiple
-            onChange={handleImagesChange}
-          />
-          {formData.images.length > 0 && (
-            <div
+
+      {/* <Row className="custom-row">
+        <Col>
+          <Form.Group controlId="formProductStatus">
+            <Form.Label className="custom-label">Còn hàng</Form.Label>
+            <input
+              type="checkbox"
               style={{
-                display: "flex",
-                flexDirection: "row",
+                width: "20px",
+                height: "20px",
+                marginLeft: "10px",
                 marginTop: "10px",
+                alignItems: "center",
+                justifyContent: "center",
               }}
-            >
-              <h5 className="custom-label" style={{ marginRight: "10px" }}>
-                Ảnh đã chọn:
-              </h5>
-              {formData.images.map((image, index) => (
-                <div key={index} style={{ marginRight: "10px" }}>
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    type="button"
-                    onClick={() => handleRemoveImage(index)}
-                  >
-                    <BsXLg />
-                  </Button>
-                  <img
-                    src={URL.createObjectURL(image)}
-                    alt={`Selected Image ${index}`}
-                    style={{
-                      width: "100px",
-                      height: "auto",
-                      marginRight: "5px",
-                    }}
-                  />
+              checked={formData.status}
+              onChange={(e) =>
+                setFormData({ ...formData, status: e.target.checked })
+              }
+            />
+          </Form.Group>
+        </Col>
+      </Row> */}
+
+      <Row className="custom-row">
+        <Col>
+          <Form.Group controlId="formProductImage">
+            <Form.Label className="custom-label">Ảnh sản phẩm</Form.Label>
+            {formData.images && formData.images.length > 0 ? (
+              <>
+                <Form.Control
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImagesChange}
+                  multiple
+                />
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    marginTop: "10px",
+                  }}
+                >
+                  <h5 className="custom-label" style={{ marginRight: "10px" }}>
+                    Ảnh đã chọn:
+                  </h5>
+                  {formData.images.map((image, index) => (
+                    <div key={index} style={{ marginRight: "10px" }}>
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={() => handleRemoveImage(index)}
+                      >
+                        <BsXLg />
+                      </Button>
+                      <img
+                        src={URL.createObjectURL(image)}
+                        alt={`Selected Image ${index}`}
+                        style={{
+                          width: "100px",
+                          height: "auto",
+                          marginRight: "5px",
+                        }}
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          )}
-        </Form.Group>
+              </>
+            ) : (
+              <Form.Control
+                key={formData.images ? "withImages" : "withoutImages"}
+                type="file"
+                accept="image/*"
+                onChange={handleImagesChange}
+                multiple
+              />
+            )}
+          </Form.Group>
+        </Col>
       </Row>
 
       <Row className="custom-row" style={{ justifyContent: "center" }}>
@@ -434,7 +439,7 @@ const ProductForm = ({
           Lưu
         </Button>
       </Row>
-    </form>
+    </Form>
   );
 };
 

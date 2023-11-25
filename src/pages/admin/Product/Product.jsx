@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { BsFillTrashFill } from "react-icons/bs";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import NavbarProduct from "../../../component/NavBarProduct/NavbarProduct";
 import ProductForm from "../../../component/productForm/ProductForm";
+import ProductFormUpdate from "../../../component/productForm/ProductFormUpdate";
 import {
   fetchItems,
   handleCheckbox,
@@ -19,6 +21,8 @@ const Product = ({
   handleSelectAll,
   fetchItems,
 }) => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetchItems();
   }, [fetchItems]);
@@ -55,7 +59,7 @@ const Product = ({
             />
           </label>
         </td>
-        <td>
+        <td style={{ width: "30%" }}>
           <img
             alt={item.nameFood}
             className="ctm-img"
@@ -63,7 +67,7 @@ const Product = ({
             style={{ maxHeight: "auto", maxWidth: "50%" }}
           />
         </td>
-        <td>{item.nameFood}</td>
+        <td style={{ width: "30%" }}>{item.nameFood}</td>
         <td>{item.quantity}</td>
         <td>
           {item.price.toLocaleString("vi", {
@@ -72,8 +76,27 @@ const Product = ({
           })}
           / {item.packingWay}
         </td>
-        <td>
-          <BsFillTrashFill className="custom-icon-trash" />
+        <td className="d-flex flex-column">
+          <Button
+            variant="btn"
+            type="submit"
+            style={{
+              backgroundColor: "#DC3749",
+              marginBottom: "5px",
+              width: "90px",
+              justifyContent: "center",
+            }}
+          >
+            Xóa
+          </Button>
+          <Button
+            variant="btn"
+            type="submit"
+            style={{ backgroundColor: "#1FA3B5", width: "90px" }}
+            onClick={() => handleUpdateClick(item.id)}
+          >
+            Cập nhật
+          </Button>
         </td>
       </tr>
     ));
@@ -83,26 +106,45 @@ const Product = ({
 
   const handleShow = () => {
     setIsShow(!isShow);
+    setIsShowUpdate(false);
   };
+
+  const [isShowUpdate, setIsShowUpdate] = useState(false);
+  const [idUpdate, setIdUpdate] = useState(null);
+  // chuyển trang update
+  const handleUpdateClick = (id) => {
+    setIsShowUpdate(!isShowUpdate);
+    setIsShow(!isShow);
+    setIdUpdate(id);
+  };
+
   return (
     <div className="d-flex flex-row">
       <div className="content">
         <NavbarProduct />
         <div className="main-content">
           <div className="d-flex flex-row">
-            <h1>Danh sách sản phẩm</h1>
+            <h1>
+              {isShowUpdate
+                ? "Cập nhật sản phẩm"
+                : isShow
+                ? "Thêm sản phẩm"
+                : "Danh sách sản phẩm"}
+            </h1>
             <Button
               variant="primary btn custom-btn ms-5"
               onClick={handleShow}
               style={{
                 fontSize: "1.2em",
-                backgroundColor: isShow ? "#dc3545" : "green",
+                backgroundColor: isShow || isShowUpdate ? "#dc3545" : "green",
               }}
             >
-              {isShow ? "Đóng" : "Thêm sản phẩm"}
+              {isShow || isShowUpdate ? "Đóng" : "Thêm sản phẩm"}
             </Button>
           </div>
-          {isShow ? (
+          {isShowUpdate ? (
+            <ProductFormUpdate itemId={idUpdate} />
+          ) : isShow ? (
             <ProductForm />
           ) : (
             <>

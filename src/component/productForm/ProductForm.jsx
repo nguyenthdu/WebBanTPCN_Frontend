@@ -75,6 +75,8 @@ const ProductForm = ({
         console.log(result);
       })
       .catch((error) => console.log("error", error));
+
+    // console.log("Form submitted:", formData);
   };
 
   const handleImagesChange = (e) => {

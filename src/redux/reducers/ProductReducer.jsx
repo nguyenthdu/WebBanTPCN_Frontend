@@ -86,6 +86,12 @@ const productReducer = (state = initialState, action) => {
     case "GET_ITEMS_ERROR":
       return { ...state, error: action.payload };
 
+    case "GET_FOOD_LIST_BY_PAGE_SUCCESS":
+      return { ...state, items: action.payload, error: null };
+
+    case "GET_FOOD_LIST_BY_PAGE_ERROR":
+      return { ...state, error: action.payload };
+
     default:
       return state;
   }

@@ -1,3 +1,4 @@
+import { Pagination } from "antd";
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { BsFillTrashFill } from "react-icons/bs";
@@ -7,7 +8,9 @@ import NavbarProduct from "../../../component/NavBarProduct/NavbarProduct";
 import ProductForm from "../../../component/productForm/ProductForm";
 import ProductFormUpdate from "../../../component/productForm/ProductFormUpdate";
 import {
+  deleteItems,
   fetchItems,
+  getFoodListByPage,
   handleCheckbox,
   handleSelectAll,
 } from "../../../redux/actions/ProductActions";
@@ -20,8 +23,33 @@ const Product = ({
   handleCheckbox,
   handleSelectAll,
   fetchItems,
+  deleteItems,
+  getFoodListByPage,
 }) => {
   const navigate = useNavigate();
+  const [page, setPage] = useState(1);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+
+    fetch(
+      `http://localhost:8080/api/v1/foodFunctions/page/${page}`,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+        console.log("result parse content", JSON.parse(result).content);
+        setData(JSON.parse(result).content);
+      })
+      .catch((error) => console.log("error", error));
+  }, [page]);
+
+  // useEffect(() => {
+  // }, [items]);
 
   useEffect(() => {
     fetchItems();
@@ -79,7 +107,7 @@ const Product = ({
         <td className="d-flex flex-column">
           <Button
             variant="btn"
-            type="submit"
+            onClick={handleDelete}
             style={{
               backgroundColor: "#DC3749",
               marginBottom: "5px",
@@ -123,6 +151,18 @@ const Product = ({
     setIdUpdate(id);
   };
 
+  // hàm xử lý khi nhấn nút để xóa các mục đã chọn
+  const handleDelete = () => {
+    // lấy ra danh sách các id đã chọn
+    const selectedIds = items
+      .filter((item) => item.selected)
+      .map((item) => item.id);
+    // gọi hành động xóa cho từng id đã chọn
+    selectedIds.forEach((id) => {
+      deleteItems(id);
+    });
+  };
+
   return (
     <div className="d-flex flex-row">
       <div className="content">
@@ -159,12 +199,23 @@ const Product = ({
                   <tr>
                     {renderItemHeader(header)}
                     <td>
-                      <BsFillTrashFill className="custom-icon-trash" />
+                      <Button
+                        variant="link"
+                        onClick={handleDelete}
+                        style={{ padding: 0 }}
+                      >
+                        <BsFillTrashFill className="custom-icon-trash" />
+                      </Button>
                     </td>
                   </tr>
                 </thead>
                 <tbody>{renderItem(items)}</tbody>
               </Table>
+              <Pagination
+                total={`${items.length}`}
+                showTotal={(total) => `Có ${total} sản phẩm`}
+                defaultCurrent={1}
+              />
             </>
           )}
         </div>
@@ -183,6 +234,8 @@ const mapDispatchToProps = {
   handleCheckbox,
   handleSelectAll,
   fetchItems,
+  deleteItems,
+  getFoodListByPage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

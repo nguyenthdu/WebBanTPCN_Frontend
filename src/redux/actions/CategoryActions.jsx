@@ -14,7 +14,6 @@ export const getAllCategory = () => {
     try {
       const data = await categoryService.getAllCategory();
       dispatch({ type: "GET_ALL_CATEGORY_SUCCESS", payload: data });
-      console.log("getAllCategory");
     } catch (error) {
       dispatch({ type: "GET_ALL_CATEGORY_ERROR", payload: error.message });
     }

@@ -2,14 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getAllBrands } from "../../redux/actions/BrandActions";
 import { getAllCategory } from "../../redux/actions/CategoryActions";
 import { getAllManufacturer } from "../../redux/actions/ManufactureActions";
-import {
-  convertImagesToBase64,
-  getItemsById,
-  updateItems,
-} from "../../redux/actions/ProductActions";
+import { addItems, getItemsById } from "../../redux/actions/ProductActions";
 import "./ProductFormStyles.scss";
 
 const ProductForm = ({
@@ -20,7 +17,7 @@ const ProductForm = ({
   getAllManufacturer,
   itemsManufacturer,
   getItemsById,
-  updateItems,
+  addItems,
   items,
   itemId,
 }) => {
@@ -29,13 +26,8 @@ const ProductForm = ({
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedManufacturer, setSelectedManufacturer] = useState(null);
-  // const [updateItem, setUpdateItem] = useState({});
-  const [productStatus, setProductStatus] = useState(
-    formData.quantity > 0 ? "1" : "0"
-  ); // 1: còn hàng, 0: hết hàng
 
-  // const navigate = useNavigate();
-  // lấy dữ liệu của brand, category, manufacturer
+  const navigate = useNavigate();
   useEffect(() => {
     getAllBrands();
     getAllCategory();
@@ -45,14 +37,6 @@ const ProductForm = ({
   const brands = itemsBrand;
   const categories = itemsCategory;
   const manufacturers = itemsManufacturer;
-
-  // cập nhật lại trạng thái của sản phẩm
-  useEffect(() => {
-    const updatedStatus = formData.quantity > 0 ? "1" : "0";
-    setProductStatus(updatedStatus);
-  }, [formData.quantity]);
-
-  // lấy dữ liệu của item theo id
   useEffect(() => {
     const fetchData = async () => {
       if (itemId) {
@@ -64,157 +48,88 @@ const ProductForm = ({
       }
     };
 
-    fetchData();
+    fetchData(); // Call the async function immediately
   }, [itemId]);
 
-  // Sau khi dữ liệu đã được load thành công
   useEffect(() => {
-    // Chuyển đổi hình ảnh thành base64
-    const itemsWithBase64 = convertImagesToBase64([items])[0];
-    setFormData(itemsWithBase64);
-  }, [items]);
+    if (itemId) {
+      const item = items;
+      setFormData(item);
+    }
+  }, [itemId, items]);
 
-  // // chỗ này cần xem lại nếu muốn set lại giá trị cho selectedBrand
-  // useEffect(() => {
-  //   console.log("formData", formData);
+  useEffect(() => {
+    console.log("formData", formData);
 
-  //   // Kiểm tra xem formData.brand có được xác định hay không trước khi truy cập thuộc tính id của nó
-  //   if (formData.brand) {
-  //     console.log("formdata.brandid", formData.brand.id);
-  //   } else {
-  //     console.log("formdata.brand is undefined");
-  // }
+    // Check if formData.brand is defined before accessing its id property
+    if (formData.brand) {
+      console.log("formdata.brandid", formData.brand.id);
+    } else {
+      console.log("formdata.brand is undefined");
+    }
 
-  //   console.log("selectedBrand", selectedBrand);
-  // }, [formData]);
+    console.log("selectedBrand", selectedBrand);
+  }, [formData]);
 
-  // nhấn lưu
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      // Trích xuất chỉ những trường cần thiết để cập nhật
-      const {
-        id,
-        nameFood,
-        description,
-        price,
-        quantity,
-        imageFiles,
-        ingredients,
-        packingWay,
-        dosageForm,
-        placeOfManufacture,
-        expiryDate,
-        manufacturer,
-        brand,
-        category,
-        discount,
-        status,
-      } = formData;
+    var formdata = new FormData();
+    formdata.append("nameFood", formData.nameFood || "thanh12ss2asd223");
+    formdata.append("description", formData.description || "sssss");
+    formdata.append("price", formData.price || "100");
+    formdata.append("quantity", formData.quantity || "10");
+    formdata.append("ingredients", formData.ingredients || "aaaaaaaaaaaa");
+    formdata.append("packingWay", formData.packingWay || "cccc");
+    formdata.append("dosageForm", formData.dosageForm || "ccc");
+    formdata.append(
+      "placeOfManufacture",
+      formData.placeOfManufacture || "ccccc"
+    );
+    formdata.append("expiryDate", formData.expiryDate || "222");
+    formdata.append("manufacturerId", formData.manufacturerId || "1");
+    formdata.append("brandId", formData.brandId || "1");
+    formdata.append("categoryId", formData.categoryId || "1");
+    formdata.append("discount", formData.discount || "10");
 
-      const dataUpdate = {
-        id,
-        nameFood,
-        description,
-        price,
-        quantity,
-        imageFiles,
-        ingredients,
-        packingWay,
-        dosageForm,
-        placeOfManufacture,
-        expiryDate,
-        manufacturerId: manufacturer.id,
-        brandId: brand.id,
-        categoryId: category.id,
-        discount,
-        status,
-      };
+    // Thêm ảnh vào FormData
+    formData.images.forEach((image) => {
+      formdata.append("imageFiles", image);
+    });
 
-      // await updateItems({ dataUpdate });
-      var requestOptions = {
-        method: "PUT",
-        body: dataUpdate,
-        redirect: "follow",
-      };
+    var requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
 
-      fetch("http://localhost:8080/api/v1/foodFunctions", requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.log("error", error));
-      console.log("Form submitted:", dataUpdate);
-    } catch (error) {
-      // Xử lý lỗi
-      console.error("Error updating item:", error);
-    }
+    fetch("http://localhost:8080/api/v1/foodFunctions", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        navigate("/admin/product");
+      })
+      .catch((error) => console.log("error", error));
   };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   var formData = new FormData();
-  //   formData.append("id", formData.id);
-  //   formData.append("nameFood", formData.nameFood);
-  //   formData.append("description", formData.description);
-  //   formData.append("price", formData.price);
-  //   formData.append("quantity", formData.quantity);
-  //   formData.append("ingredients", formData.ingredients);
-  //   formData.append("packingWay", formData.packingWay);
-  //   formData.append("dosageForm", formData.dosageForm);
-  //   formData.append("placeOfManufacture", formData.placeOfManufacture);
-  //   formData.append("expiryDate", formData.expiryDate);
-  //   formData.append("manufacturerId", formData.manufacturer.id);
-  //   formData.append("brandId", formData.brand.id);
-  //   formData.append("categoryId", formData.category.id);
-  //   formData.append("status", formData.status);
-  //   formData.append("discount", formData.discount);
-  //   formData.imageFiles.forEach((image) => {
-  //     formData.append("image", image);
-  //   });
-
-  //   console.log("Form submitted:", formData);
-
-  //   var requestOptions = {
-  //     method: "PUT",
-  //     body: formData,
-  //     redirect: "follow",
-  //   };
-
-  //   fetch("http://localhost:8080/api/v1/foodFunctions", requestOptions)
-  //     .then((response) => response.text())
-  //     .then((result) => console.log(result))
-  //     .catch((error) => console.log("error", error));
-  // };
 
   const handleImagesChange = (e) => {
     // Xử lý khi người dùng chọn hình ảnh
     const files = Array.from(e.target.files);
-
-    // Chuyển đổi các ảnh thành base64
-    const base64Images = files.map((file) => URL.createObjectURL(file));
-
-    // Thêm các ảnh mới vào danh sách images và imageBase64
+    // Thêm các ảnh mới vào danh sách hiện tại
     setFormData((prevFormData) => ({
       ...prevFormData,
-      imageFiles: [...(prevFormData.imageFiles || []), ...files],
-      imageBase64: [...(prevFormData.imageBase64 || []), ...base64Images],
+      images: [...(prevFormData.images || []), ...files],
     }));
   };
 
   // hàm xóa ảnh
   const handleRemoveImage = (index) => {
     setFormData((prevFormData) => {
-      const newImages = [...prevFormData.imageBase64];
+      const newImages = [...prevFormData.images];
       newImages.splice(index, 1);
-
-      const newImageFiles = [...prevFormData.imageFiles];
-      newImageFiles.splice(index, 1);
-
       return {
         ...prevFormData,
-        imageBase64: newImages,
-        imageFiles: newImageFiles,
+        images: newImages,
       };
     });
   };
@@ -322,41 +237,6 @@ const ProductForm = ({
             />
           </Form.Group>
         </Col>
-
-        <Col>
-          <Form.Group controlId="formProductStatus">
-            <Form.Label className="custom-label">
-              <h5 className="custom-label">Trạng thái</h5>
-            </Form.Label>
-            <Form.Control
-              disabled
-              as="select"
-              value={productStatus}
-              onChange={(e) => {
-                setProductStatus(e.target.value);
-                setFormData({
-                  ...formData,
-                  status: productStatus === 1 ? true : false,
-                });
-              }}
-              style={{
-                fontWeight: "bold",
-                color:
-                  productStatus === "1"
-                    ? "green"
-                    : productStatus === "0"
-                    ? "red"
-                    : "black",
-              }}
-            >
-              <option value="" disabled selected>
-                Chọn trạng thái
-              </option>
-              <option value="1">Còn hàng</option>
-              <option value="0">Hết hàng</option>
-            </Form.Control>
-          </Form.Group>
-        </Col>
       </Row>
       <Row className="custom-row">
         <Col>
@@ -446,10 +326,10 @@ const ProductForm = ({
                 setSelectedBrand(e.target.value);
                 setFormData({
                   ...formData,
-                  // brandId: parseInt(e.target.value, 10),
-                  brand: brands.find(
-                    (brand) => brand.id === parseInt(e.target.value, 10)
-                  ),
+                  brandId: parseInt(e.target.value, 10),
+                  // brand: brands.find(
+                  //   (brand) => brand.id === parseInt(e.target.value, 10)
+                  // ),
                 });
               }}
             >
@@ -472,22 +352,16 @@ const ProductForm = ({
             </Form.Label>
             <Form.Control
               as="select"
-              value={
-                selectedCategory
-                  ? selectedCategory
-                  : formData.category
-                  ? formData.category.id
-                  : ""
-              }
+              value={selectedCategory}
               placeholder="Chọn danh mục"
               onChange={(e) => {
                 setSelectedCategory(e.target.value);
                 setFormData({
                   ...formData,
-                  // categoryId: parseInt(e.target.value, 10),
-                  category: categories.find(
-                    (category) => category.id === parseInt(e.target.value, 10)
-                  ),
+                  categoryId: parseInt(e.target.value, 10),
+                  // category: categories.find(
+                  //   (category) => category.id === parseInt(e.target.value, 10)
+                  // ),
                 });
               }}
             >
@@ -510,23 +384,17 @@ const ProductForm = ({
             </Form.Label>
             <Form.Control
               as="select"
-              value={
-                selectedManufacturer
-                  ? selectedManufacturer
-                  : formData.manufacturer
-                  ? formData.manufacturer.id
-                  : ""
-              }
+              value={selectedManufacturer}
               placeholder="Chọn nhà sản xuất"
               onChange={(e) => {
                 setSelectedManufacturer(e.target.value);
                 setFormData({
                   ...formData,
-                  // manufacturerId: parseInt(e.target.value, 10),
-                  manufacturer: manufacturers.find(
-                    (manufacturer) =>
-                      manufacturer.id === parseInt(e.target.value, 10)
-                  ),
+                  manufacturerId: parseInt(e.target.value, 10),
+                  // manufacturer: manufacturers.find(
+                  //   (manufacturer) =>
+                  //     manufacturer.id === parseInt(e.target.value, 10)
+                  // ),
                 });
               }}
             >
@@ -557,7 +425,7 @@ const ProductForm = ({
             multiple
             onChange={handleImagesChange}
           />
-          {formData.imageBase64 && formData.imageBase64.length > 0 && (
+          {formData.images && formData.imageBase64.length > 0 && (
             <div
               style={{
                 display: "flex",
@@ -568,7 +436,7 @@ const ProductForm = ({
               <h5 className="custom-label" style={{ marginRight: "10px" }}>
                 Ảnh đã chọn:
               </h5>
-              {formData.imageBase64.map((image, index) => (
+              {formData.images.map((image, index) => (
                 <div key={index} style={{ marginRight: "10px" }}>
                   <Button
                     variant="danger"
@@ -579,7 +447,7 @@ const ProductForm = ({
                     <BsXLg />
                   </Button>
                   <img
-                    src={image}
+                    src={URL.createObjectURL(image)}
                     alt={`Selected Image ${index}`}
                     style={{
                       width: "100px",
@@ -622,7 +490,7 @@ const mapDispatchToProps = {
   getAllCategory,
   getAllBrands,
   getAllManufacturer,
-  updateItems,
+  addItems,
   getItemsById,
 };
 

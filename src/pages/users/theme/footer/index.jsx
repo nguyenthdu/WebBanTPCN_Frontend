@@ -5,31 +5,35 @@ export default function Footer() {
     <div className="footer">
       <div className="row">
         <div className="col-4 OurAwards">
-          <h2>Our Awards</h2>
+          <h2>Thông tin về chúng tôi</h2>
           <p>
-            London is a megalopolis of people, ideas and frenetic energy. The
-            capital and largest city of the United Kingdom.
+            Hiệu thuốc hoạt động với mong muốn mang đến sự chăm sóc sức khỏe tốt
+            nhất cho cộng đồng. Luôn sẵn sàng tư vấn và hỗ trợ quý khách trong
+            việc chọn lựa sản phẩm phù hợp nhất.
+            <br /> Cam kết đem lại sự tiện lợi và tin cậy cho mọi người khi mua
+            sắm tại hiệu thuốc
           </p>
           <img
-            src="https://themes-themegoods.b-cdn.net/grandtour/demo/wp-content/uploads/2016/12/awards.png"
+            style={{ width: 150, height: 150 }}
+            src="https://static3.bigstockphoto.com/2/5/3/large2/352088765.jpg"
             alt="myphoto"
           />
         </div>
         <div className="col-4 ContactInfo">
-          <h2>Contact Info</h2>
+          <h2>Thông tin liên lạc</h2>
           <span>
-            <i className="fa-solid fa-phone-volume"></i>1-567-124-44227
+            <i className="fa-solid fa-phone-volume"></i>18006928
           </span>
           <br></br>
 
           <span>
-            <i className="fa-solid fa-location-dot"></i>184 Main Street East
-            Perl Habour 8007
+            <i className="fa-solid fa-location-dot"></i>379-381 Hai Bà Trưng, P.
+            Võ Thị Sáu, Q.3, TP. HCM
           </span>
           <br></br>
           <span>
-            <i className="fa-regular fa-clock"></i>Mon - Sat 8.00 - 18.00 Sunday
-            CLOSED
+            <i className="fa-regular fa-clock"></i>Thứ 2 - Thứ 7 8.00 - 18.00 ||
+            Chủ Nhật CLOSED
           </span>
           <br></br>
           <div className="socialMedia">
@@ -41,41 +45,19 @@ export default function Footer() {
           </div>
         </div>
         <div className="col-4 RecentTrips">
-          <h2>Recent Trips</h2>
+          <h2>CHỨNG NHẬN BỞI</h2>
           <div className="row">
             <div className="col-4">
               <img
-                src="https://live.staticflickr.com/8688/28760131762_e4a64b20c4_q.jpg"
+                style={{ width: 150, height: 150 }}
+                src="https://nanoclean.vn/wp-content/uploads/2023/07/DMCA.png"
                 alt="myphoto"
               />
             </div>
             <div className="col-4">
               <img
-                src="https://live.staticflickr.com/7519/27308262031_a6ebf0572e_q.jpg"
-                alt="myphoto"
-              />
-            </div>
-            <div className="col-4">
-              <img
-                src="https://live.staticflickr.com/7160/27287965356_60355f51d7_q.jpg"
-                alt="myphoto"
-              />
-            </div>
-            <div className="col-4">
-              <img
-                src="https://live.staticflickr.com/7365/27138570412_d25002a5c9_q.jpg"
-                alt="myphoto"
-              />
-            </div>
-            <div className="col-4">
-              <img
-                src="https://live.staticflickr.com/7543/26520497604_1df03a02bc_q.jpg"
-                alt="myphoto"
-              />
-            </div>
-            <div className="col-4">
-              <img
-                src="https://live.staticflickr.com/7502/27012097142_f1511b67bc_q.jpg"
+                style={{ width: 150, height: 150 }}
+                src="http://forci.vn/Pictures/dathongbao.jpg"
                 alt="myphoto"
               />
             </div>
@@ -91,13 +73,14 @@ export default function Footer() {
       />
       <div className="row">
         <div className="col-6" style={{ color: "rgb(187, 185, 185)" }}>
-          &#169; Copyright Grand Tour Theme Demo - Theme by ThemeGoods
+          &#169; © 2007 - 2022 Công ty Cổ Phần Dược Phẩm FPT IUH <br /> ĐKKD
+          0315275368 cấp ngày 17/09/2018 tại Sở Kế hoạch Đầu tư TPHCM
         </div>
         <div className="col-6 MenuFooter">
-          <span>Home</span>
-          <span>Tour</span>
-          <span>Blog</span>
-          <span>Purchase Theme</span>
+          <span>Trang chủ</span>
+          <span>TPCN</span>
+          <span>Trang Blog</span>
+          <span>Đặt hàng</span>
         </div>
       </div>
     </div>

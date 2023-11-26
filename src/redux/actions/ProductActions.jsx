@@ -29,6 +29,19 @@ export const fetchItems = () => {
   };
 };
 
+export const getFoodListByPage = (page) => {
+  return async (dispatch) => {
+    try {
+      const data = await foodFunctionService.getFoodListByPage(page);
+      console.log("page", page);
+      console.log("data", data);
+      dispatch({ type: "GET_FOOD_LIST_BY_PAGE_SUCCESS", payload: data });
+    } catch (error) {
+      dispatch({ type: "GET_FOOD_LIST_BY_PAGE_ERROR", payload: error.message });
+    }
+  };
+};
+
 export const addItems = (item) => {
   return async (dispatch) => {
     try {
@@ -44,6 +57,7 @@ export const updateItems = (item) => {
   return async (dispatch) => {
     try {
       await foodFunctionService.updateFoodFunction(item);
+      console.log("ok");
       dispatch({ type: "UPDATE_ITEMS_SUCCESS", payload: item });
     } catch (error) {
       dispatch({ type: "UPDATE_ITEMS_ERROR", payload: error.message });
@@ -54,7 +68,8 @@ export const updateItems = (item) => {
 export const deleteItems = (id) => {
   return async (dispatch) => {
     try {
-      await foodFunctionService.deleteFood(id);
+      await foodFunctionService.deleteFoodFunction(id);
+      console.log("id", id);
       dispatch({ type: "DELETE_ITEMS_SUCCESS", payload: id });
     } catch (error) {
       dispatch({ type: "DELETE_ITEMS_ERROR", payload: error.message });

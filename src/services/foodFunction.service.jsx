@@ -4,6 +4,8 @@ import { apiUtils } from "../apiUtils/apiUtils";
 
 const foodFunctionService = {
   getFoodList: () => apiUtils.request("foodFunctions", "GET"),
+  getFoodListByPage: (page) =>
+    apiUtils.request(`foodFunctions/page/${page}`, "GET"),
   getFood: (id) => apiUtils.request(`foodFunctions/${id}`, "GET"),
   getFoodByName: (name) => {
     // Specific logic for searching by name, using apiUtils.request for generic API calls
